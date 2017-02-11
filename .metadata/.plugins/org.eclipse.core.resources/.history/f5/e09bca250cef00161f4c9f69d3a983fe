@@ -1,0 +1,20 @@
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class Screen {
+
+	public Screen(){
+		
+		Frame frame = new Frame();
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		
+		frame.setBackground(Color.BLACK);
+		frame.setVisible(true);
+		
+		
+		
+	}
+	
+	
+}

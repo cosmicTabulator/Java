@@ -1,0 +1,18 @@
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class Screen {
+
+	public Screen(){
+		
+		Panel panel = new Panel();
+		BufferedImage image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		
+		panel.setBackground(Color.BLACK);
+		panel.setVisible(true);
+		
+	}
+	
+	
+}

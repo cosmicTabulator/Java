@@ -1,0 +1,20 @@
+
+public class Object {
+
+	int x;
+	int y;
+	float xV;
+	float yV;
+	
+	public Object(int startX, int startY){
+		
+		x = startX;
+		y = startY;
+		
+	}
+	
+	public void getPos(){
+		x = (int) x + xV;
+	}
+	
+}

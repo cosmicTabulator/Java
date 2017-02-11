@@ -1,0 +1,49 @@
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+
+public class Screen {
+
+	static BufferedImage image;
+	
+	public Screen(){
+		
+		Frame frame = new Frame();
+		
+		frame.setSize(100, 100);
+		
+		image = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		
+		frame.add(new ImageContainer());
+		
+		frame.addKeyListener(new KeyListener(){
+			@Override
+			public void keyTyped(KeyEvent e){
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e){
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e){
+			}
+		});
+		
+	}
+	
+class ImageContainer extends Component{
+	
+	public void paint(Graphics g){
+		
+		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.drawImage(image, 0, 0, this);
+		
+	}
+	
+}
+
+}

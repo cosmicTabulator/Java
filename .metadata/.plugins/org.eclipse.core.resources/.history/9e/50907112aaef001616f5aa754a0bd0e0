@@ -1,0 +1,18 @@
+import java.awt.Graphics;
+
+public class Draw {
+
+	public Graphics g;
+	
+	public Draw(){
+		
+		g = Screen.image.getGraphics();
+		
+	}
+	
+	public void refresh(){
+		g.dispose();
+		g = Screen.image.getGraphics();
+	}
+	
+}
