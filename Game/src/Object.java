@@ -3,33 +3,36 @@ import java.awt.Graphics;
 
 public class Object {
 
-	int x;
-	int y;
-	float xV = 0;
-	float yV = 1;
+	Vector pos;
+	Vector vel;
 	int width = 10;
 	int height = 10;
 	Draw d;
 	
 	public Object(int startX, int startY){
 		
-		x = startX;
-		y = startY;
+		pos = new Vector(startX, startY);
+		vel = new Vector(0,0);
 		d = new Draw();
+	}
+	
+	public Object(Vector pos, Vector vel){
 		
+		this.pos = pos;
+		this.vel = vel;
+		d = new Draw();
 	}
 	
 	public void getPos(){
-		x = (int) (x + xV);
-		y = (int) (y + yV);
-		System.out.println(x);
-		System.out.println(y);
+		pos = Vector.add(pos, vel);
+		System.out.println(pos.x);
+		System.out.println(pos.y);
 	}
 	
 	public void draw(){
 		Graphics g = d.getDraw();
 		g.setColor(Color.RED);
-		g.fillRect(x, y, width, height);
+		g.fillRect((int)pos.x, (int)pos.y, width, height);
 		g.dispose();
 	}
 	

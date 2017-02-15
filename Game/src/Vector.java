@@ -17,11 +17,11 @@ public class Vector {
 		new Vector(x, y, 0);
 	}
 	
-	public Vector add(Vector a, Vector b){
+	public static Vector add(Vector a, Vector b){
 		
-		x = a.x + b.x;
-		y = a.y + b.y;
-		z = a.z + b.z;
+		float x = a.x + b.x;
+		float y = a.y + b.y;
+		float z = a.z + b.z;
 		
 		Vector c = new Vector(x, y, z);
 		

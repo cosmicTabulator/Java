@@ -21,7 +21,7 @@ public class Main {
 		Screen screen = new Screen(400, 300);
 		draw = new Draw();
 		
-		ball = new Object(200,0);
+		ball = new Object(new Vector(200,0),new Vector(0,1));
 		
 //		Font f = new Font(Font.MONOSPACED, Font.PLAIN, 14);
 //		
@@ -63,14 +63,15 @@ public class Main {
 	}
 	
 	public void tickUpdate(){
-		y++;
-		Graphics g = draw.getDraw();
-		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, 400, 300);
-		g.setColor(Color.RED);
-		g.fillRect(x, y, 10, 10);
-		g.dispose();
+//		Graphics g = draw.getDraw();
+//		g.setColor(Color.BLACK);
+//		g.drawRect(0, 0, 400, 300);
+//		g.setColor(Color.RED);
+//		g.fillRect(x, y, 10, 10);
+//		g.dispose();
 		Screen.screen.repaint();
+		ball.getPos();
+		ball.draw();
 		
 	}
 
