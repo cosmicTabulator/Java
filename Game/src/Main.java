@@ -6,13 +6,12 @@ public class Main {
 
 	public static Screen screen;
 	public boolean running = true;
-	int time;
+	static int time;
 	int lastTick;
-	int tickCount = 50;
-	int ticks;
+	static int tickCount = 50;
+	public static float timePerTick = (float)tickCount/1000;
+	static int ticks;
 	Draw draw;
-	int x = 200;
-	int y = 0;
 	
 	static Object ball;
 	
@@ -21,7 +20,7 @@ public class Main {
 		Screen screen = new Screen(400, 300);
 		draw = new Draw();
 		
-		ball = new Object(new Vector(200,0),new Vector(0,1));
+		ball = new Object(new Vector(200,0,0),new Vector(0,100,0));
 		
 //		Font f = new Font(Font.MONOSPACED, Font.PLAIN, 14);
 //		
@@ -39,39 +38,38 @@ public class Main {
 		
 		g.dispose();
 		
-		mainLoop();
+		mainLoop(screen);
 		
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		new Main();
 
 	}
 	
-	private void mainLoop(){
+	private void mainLoop(Screen screen){
 		lastTick = (int) System.currentTimeMillis();
 		while(running){
 			time = (int) System.currentTimeMillis();
 			if (time - lastTick > tickCount){
 				lastTick = time;
-				tickUpdate();
+				tickUpdate(screen);
 				ticks++;
 				System.out.println(ticks);
 			}
 		}
 	}
 	
-	public void tickUpdate(){
-//		Graphics g = draw.getDraw();
-//		g.setColor(Color.BLACK);
-//		g.drawRect(0, 0, 400, 300);
-//		g.setColor(Color.RED);
-//		g.fillRect(x, y, 10, 10);
-//		g.dispose();
-		Screen.screen.repaint();
+	public void tickUpdate(Screen screen){
+		Graphics g = draw.getDraw();
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 400, 300);
 		ball.getPos();
-		ball.draw();
+		ball.draw(g);
+		g.dispose();
+		screen.pane.repaint();
+		ball.pos.print();
+		ball.vel.print();
 		
 	}
 

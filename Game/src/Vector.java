@@ -13,10 +13,6 @@ public class Vector {
 		
 	}
 	
-	public Vector(float x, float y){
-		new Vector(x, y, 0);
-	}
-	
 	public static Vector add(Vector a, Vector b){
 		
 		float x = a.x + b.x;
@@ -25,6 +21,16 @@ public class Vector {
 		
 		Vector c = new Vector(x, y, z);
 		
+		return c;
+	}
+	
+	public static Vector mult(Vector a, float n){
+		
+		float x = a.x * n;
+		float y = a.y * n;
+		float z = a.z * n;
+		
+		Vector c = new Vector(x,y,z);
 		return c;
 	}
 	
@@ -48,4 +54,7 @@ public class Vector {
 		return c;
 	}
 	
+	public void print(){
+		System.out.println(this.x + ", " + this.y + ", " + this.z);
+	}
 }

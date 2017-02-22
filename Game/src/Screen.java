@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 public class Screen implements KeyListener{
 
 	JFrame frame;
-	static JLabel screen;
+	JLabel pane;
 	static BufferedImage image;
 	
 	public Screen(int width, int hieght){
@@ -19,7 +19,7 @@ public class Screen implements KeyListener{
 		frame.setSize(width, hieght);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		image = new BufferedImage(width, hieght, BufferedImage.TYPE_INT_RGB);
-		screen = new JLabel(new ImageIcon(image));
+		pane = new JLabel(new ImageIcon(image));
 		
 		Graphics g = image.getGraphics();
 		
@@ -28,7 +28,7 @@ public class Screen implements KeyListener{
 		
 		g.dispose();
 		
-		frame.setContentPane(screen);
+		frame.setContentPane(pane);
 		frame.pack();
 		frame.setVisible(true);
 		
