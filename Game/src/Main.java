@@ -1,6 +1,7 @@
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -8,35 +9,20 @@ public class Main {
 	public boolean running = true;
 	static int time;
 	int lastTick;
-	static int tickCount = 50;
-	public static float timePerTick = (float)tickCount/1000;
+	static int tickCount = 20;
+	public static float fps = (float)tickCount/1000;
 	static int ticks;
-	Draw draw;
-	
-	static Object ball;
+	static List<Object> objects = new ArrayList<Object>();
+	static List<Object> newObjects = new ArrayList<Object>();
+	static Player player;
 	
 	public Main(){
 		
 		Screen screen = new Screen(400, 300);
-		draw = new Draw();
 		
-		ball = new Object(new Vector(200,0,0),new Vector(0,100,0));
+		player = new Player(new Vector(200,150,0),new Vector(0,0,0));
 		
-//		Font f = new Font(Font.MONOSPACED, Font.PLAIN, 14);
-//		
-//		draw.g.setFont(f);
-//		
-//		draw.g.drawString("A@B", 0, 10);
-//		draw.g.drawLine(0, 14, 400, 14);
-//		draw.g.drawLine(7, 0, 7, 300);
-//		draw.g.drawLine(14, 0, 14, 300);
-		
-		Graphics g = draw.getDraw();
-		
-		g.drawString("Terrus", 200, 100);
-		g.drawString("v 0.0", 200, 200);
-		
-		g.dispose();
+		objects.add(player);
 		
 		mainLoop(screen);
 		
@@ -61,16 +47,32 @@ public class Main {
 	}
 	
 	public void tickUpdate(Screen screen){
-		Graphics g = draw.getDraw();
+		newObjects.clear();
+		for(Object o : objects){
+			newObjects.add(o);
+		}
+		Graphics g = Screen.image.getGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 400, 300);
-		ball.getPos();
-		ball.draw(g);
+		for(Object o : objects){
+			o.onTick(ticks);
+			o.getPos();
+			o.draw(g);
+		}
 		g.dispose();
 		screen.pane.repaint();
-		ball.pos.print();
-		ball.vel.print();
-		
+		player.pos.print();
+		player.vel.print();
+		System.out.println(Screen.keys.toString());
+		objects.clear();
+		for(Object o : newObjects){
+			objects.add(o);
+		}
+		System.out.println(objects.size());
+	}
+	
+	public static void addObject(Object o){
+		newObjects.add(o);
 	}
 
 }

@@ -2,16 +2,19 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Screen implements KeyListener{
+public class Screen{
 
 	JFrame frame;
 	JLabel pane;
 	static BufferedImage image;
+	public static Set<Integer> keys = new HashSet<Integer>();
 	
 	public Screen(int width, int hieght){
 		
@@ -23,35 +26,43 @@ public class Screen implements KeyListener{
 		
 		Graphics g = image.getGraphics();
 		
-//		g.drawString("Terrus", 200, 100);
-//		g.drawString("v 0.0", 200, 200);
-		
 		g.dispose();
 		
+		KeyListener keylistener = new KeyListener(){
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+				int keyCode = e.getKeyCode();
+				if(!keys.contains(keyCode)){
+					keys.add(keyCode);
+				}
+				
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+				int keyCode = e.getKeyCode();
+				if(keys.contains(keyCode)){
+					keys.remove(keyCode);
+				}	
+			}
+		};
+		
+		frame.addKeyListener(keylistener);
 		frame.setContentPane(pane);
 		frame.pack();
 		frame.setVisible(true);
 		
 	}
-	
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 	
 }
