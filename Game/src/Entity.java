@@ -124,7 +124,6 @@ public class Entity {
 	
 	Entity closest(Entity o, int[] idArray, boolean ignore){
 		
-		int closestId;
 		float x;
 		float y;
 		double h;
@@ -146,7 +145,6 @@ public class Entity {
 				}
 				if(inArray != ignore){
 					closestDist = h;
-					closestId = i.intId;
 					closest = i;
 				}
 			}

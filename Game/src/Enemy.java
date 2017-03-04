@@ -44,18 +44,18 @@ public class Enemy extends Entity{
 		Entity closest = closest(this, avoid, false);
 		if(closest == null || dist(closest.pos, this.pos) > 50){
 			if(this.pos.x > 350){
-				this.vel.x = -200;
+				this.vel.x = -150;
 			}
 			if(this.pos.x < 50){
-				this.vel.x = 200;
+				this.vel.x = 150;
 			}
 			
 			if(this.vel.x == 0){
 				if(rand.nextBoolean()){
-					this.vel.x = 200;
+					this.vel.x = 150;
 				}
 				else{
-					this.vel.x = -200;
+					this.vel.x = -150;
 				}
 			}
 			

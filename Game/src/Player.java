@@ -12,6 +12,7 @@ public class Player extends Entity{
 		this.id = 1;
 		this.intId = 0;
 		this.c = 0.1f;
+		this.v = 100;
 	}
 
 	@Override
@@ -42,14 +43,6 @@ public class Player extends Entity{
 			lastSpawn = ticks;
 		}
 		
-		if(s.contains(KeyEvent.VK_Q)){
-			System.exit(0);
-		}
-		
-		if(s.contains(KeyEvent.VK_E) && ticks - lastSpawnEnemy > 20){
-			Main.addObject(new Shooter(new Vector(pos.x, pos.y - 100, 0)));
-			lastSpawnEnemy = ticks;
-		}
 	}
 	
 	@Override

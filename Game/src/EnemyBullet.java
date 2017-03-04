@@ -14,7 +14,7 @@ public class EnemyBullet extends Entity{
 		
 		this.ticks = ticks;
 		
-		if(pos.y > 400 || pos.y < 0){
+		if(pos.y > 300 || pos.y < 0 || pos.x > 400 || pos.x < 0){
 			kill();
 		}
 		

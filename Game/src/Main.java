@@ -7,8 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Main {
+/*
+ * Created by cosmicTabulator (cT)
+ * Friday March 5, 2017
+ * 
+ * V0.1.2
+ * -I've forgotten to track changes prior to this version, Sorry!
+ * 
+ * ~I'll also keep a dev's note here from now on
+ * 
+ */
 
+
+public class Main {
+	
+	public static final String version = "0.1.2";
+	
 	public static int score = 0;
 	public static int highScore = 0;
 	static boolean adding = false;
@@ -79,6 +93,9 @@ public class Main {
 	}
 	
 	public void tickUpdate(Screen screen){
+		if(Screen.keys.contains(KeyEvent.VK_Q)){
+			System.exit(0);
+		}
 		newObjects.clear();
 		for(Entity o : objects){
 			newObjects.add(o);
@@ -87,6 +104,7 @@ public class Main {
 		g.scale(screenScale, screenScale);
 		world.draw(g);
 		if(!objects.contains(player)){
+			levelSplash = false;
 			newObjects.clear();
 			drawKillScreen(g);
 			if(Screen.keys.contains(KeyEvent.VK_R)){
@@ -100,9 +118,6 @@ public class Main {
 					//fh.write(Integer.toString(highScore));
 				}
 				score = 0;
-			}
-			if(Screen.keys.contains(KeyEvent.VK_Q)){
-				System.exit(0);
 			}
 		}
 		eventSequence();
@@ -153,24 +168,28 @@ public class Main {
 				levelSplash = true;
 			}
 			
+			System.out.println("Killcount " + killCount);
+			System.out.println("Spawn " + spawn);
+			System.out.println("Spawn Total " + spawnTotal);
+			
 			if(timer > spawnTime && spawnTotal < spawn){
 				levelSplash = false;
 				spawnTime = rate(level);
 				timer = 0;
 				spawnTotal++;
 				if(level > 5){
-					if(rand.nextInt(9) > 8){
+					if(rand.nextInt(10) > 8){
 						addObject(new Enemy(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
 					}
-					else if(rand.nextInt(9) > 4){
+					else if(rand.nextInt(10) > 4){
 						addObject(new Shooter(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
 					}
 					else{
 						addObject(new Seeker(new Vector(rand.nextInt(260) + 60, 0, 0)));
 					}
 				}
-				if(level > 2){
-					if(rand.nextInt(9) > 4){
+				else if(level > 2){
+					if(rand.nextInt(10) > 4){
 						addObject(new Shooter(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
 					}
 					else{
@@ -184,7 +203,7 @@ public class Main {
 			
 			if(killCount == spawn){
 				for (Entity o: objects){
-					if(o.id == 4){
+					if(o.id == 4 || o.enemy){
 						o.kill();
 					}
 				}
@@ -201,14 +220,14 @@ public class Main {
 
 	private int spawn(int level) {
 
-		int out = (int) (level * 2.5);
+		int out = (int) (level * 2.5) + rand.nextInt(level * 2);
 		
 		return out;
 	}
 
 	private int rate(int level) {
 		int out;
-		if(level > 10){
+		if(level > 9){
 			out = rand.nextInt(10) + 10;
 		}
 		else if(level > 4){

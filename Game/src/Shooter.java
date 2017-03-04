@@ -36,7 +36,7 @@ public class Shooter extends Entity{
 				this.vel.y = this.vel.y*-1;
 			}
 			
-			this.vel = Vector.mult(Vector.reduce(this.vel), 50);
+			this.vel = Vector.mult(Vector.reduce(this.vel), 70);
 			
 			timer = 0;
 		}
@@ -44,10 +44,24 @@ public class Shooter extends Entity{
 			moving = false;
 			this.vel.x = 0;
 			this.vel.y = 0;
-			Main.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
-			Main.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
-			Main.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
-			Main.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
+			if(Main.level > 7){
+			
+				Main.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(200, 200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(-200, 200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(200, -200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(-200, -200, 0)));
+				
+			}
+			else{
+				Main.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
+				Main.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
+			}
 		}
 		
 		timer++;

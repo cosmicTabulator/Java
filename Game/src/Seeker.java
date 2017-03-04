@@ -23,7 +23,7 @@ public class Seeker extends Entity{
 	
 	@Override
 	public void AI(int ticks){
-		if(Main.level > 4){
+		if(Main.level > 3){
 			speed = 150;
 		}
 		if(ticks - spawnTime > 20){
@@ -35,9 +35,6 @@ public class Seeker extends Entity{
 				Vector dir = Vector.add(Vector.mult(this.pos, -1), playerPos);
 				dir = Vector.reduce(dir);
 				this.vel = lerp(Vector.mult(dir, speed), this.vel, this.c);
-			}
-			else{
-				kill();
 			}
 		}
 		
