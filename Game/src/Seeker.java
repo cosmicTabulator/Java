@@ -24,7 +24,7 @@ public class Seeker extends Entity{
 	@Override
 	public void AI(int ticks){
 		if(Main.level > 4){
-			speed = 200;
+			speed = 150;
 		}
 		if(ticks - spawnTime > 20){
 		
@@ -43,7 +43,7 @@ public class Seeker extends Entity{
 		
 		if(isCollided(2, this)){
 			kill();
-			Main.addScore(10);
+			Main.score = Main.score + 10;
 		}
 	}
 }

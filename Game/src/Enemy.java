@@ -27,7 +27,7 @@ public class Enemy extends Entity{
 		if(isCollided(2, this)){
 			//System.out.println("Collision");
 			kill();
-			Main.addScore(100);
+			Main.score = Main.score + 100;
 		}
 		
 		AI(ticks);

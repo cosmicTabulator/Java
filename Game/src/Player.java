@@ -38,7 +38,7 @@ public class Player extends Entity{
 		}
 		
 		if(s.contains(KeyEvent.VK_SPACE) && ticks - lastSpawn > fireRate){
-			Main.addObject(new Bullet (new Vector(pos.x, pos.y, 0), new Vector(0, -400, 0)));
+			Main.addObject(new Bullet (new Vector(pos.x + (width/2), pos.y, 0), new Vector(0, -400, 0)));
 			lastSpawn = ticks;
 		}
 		

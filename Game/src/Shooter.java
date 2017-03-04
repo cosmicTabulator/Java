@@ -54,7 +54,7 @@ public class Shooter extends Entity{
 		
 		if(isCollided(2, this)){
 			kill();
-			Main.addScore(20);
+			Main.score = Main.score + 20;
 		}
 		
 	}

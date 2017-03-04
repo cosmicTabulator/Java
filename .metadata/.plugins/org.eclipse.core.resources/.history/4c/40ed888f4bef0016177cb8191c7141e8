@@ -1,6 +1,0 @@
-
-public class Draw {
-
-	Screen screen = Main.screen;
-	
-}
