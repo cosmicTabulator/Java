@@ -1,13 +1,25 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Bullet extends Entity{
-
+	
 	public Bullet(Vector pos, Vector vel) {
 		super(pos, vel);
 		this.id = 2;
 		this.width = 3;
 		this.height = 5;
+		
+		try {
+		    img = ImageIO.read(getClass().getResource("Textures/Bullet1.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
 	}
 
 	@Override
@@ -22,9 +34,8 @@ public class Bullet extends Entity{
 	}
 	
 	@Override
-	public void draw(Graphics g){
-		g.setColor(Color.YELLOW);
-		g.fillRect((int)pos.x, (int)pos.y, width, height);
+	public void draw(Graphics2D g){
+		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 }

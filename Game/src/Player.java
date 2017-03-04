@@ -1,5 +1,13 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 public class Player extends Entity{
 
@@ -15,6 +23,14 @@ public class Player extends Entity{
 		this.intId = 0;
 		this.c = 0.1f;
 		this.v = 100;
+		
+		try {
+		    img = ImageIO.read(getClass().getResource("Textures/Ship1.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
+		
 	}
 
 	@Override
@@ -53,6 +69,11 @@ public class Player extends Entity{
 			lastSpawn = ticks;
 		}
 		
+	}
+	
+	@Override
+	public void draw(Graphics2D g){
+		g.drawImage(this.img, (int)this.pos.x, (int)this.pos.y, width, height, null);
 	}
 	
 	@Override

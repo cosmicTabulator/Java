@@ -1,6 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Random;;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Random;
+
+import javax.imageio.ImageIO;;
 
 public class Dodger extends Entity{
 
@@ -14,12 +19,17 @@ public class Dodger extends Entity{
 		this.enemy = true;
 		this.id = 3;
 		
+		try {
+		    img = ImageIO.read(getClass().getResource("Textures/Enemy3.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
 	}
 	
 	@Override
-	public void draw(Graphics g){
-		g.setColor(Color.GREEN);
-		g.fillRect((int)pos.x, (int)pos.y, width, height);
+	public void draw(Graphics2D g){
+		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 	@Override

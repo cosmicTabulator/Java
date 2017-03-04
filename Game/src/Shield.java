@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Shield extends Entity{
 
@@ -8,15 +12,20 @@ public class Shield extends Entity{
 		super(pos, new Vector(0,0,0));
 		this.id = 7;
 		this.width = 16;
-		this.height = 2;
+		this.height = 3;
 		
+		try {
+		    img = ImageIO.read(getClass().getResource("Textures/Sheild.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
 	}
 	
 	@Override
-	public void draw(Graphics g){
+	public void draw(Graphics2D g){
 		
-		g.setColor(Color.RED);
-		g.fillRect((int)(this.pos.x - (this.width-Main.player.width)/2), (int)this.pos.y, this.width, this.height);
+		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 		
 	}
 	

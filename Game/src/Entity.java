@@ -1,9 +1,14 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+@SuppressWarnings("unused")
 public class Entity {
 
 	Vector pos;
@@ -19,6 +24,8 @@ public class Entity {
 	boolean melee = false;
 	boolean enemy = false;
 	
+	BufferedImage img;
+	
 	public Entity(Vector pos, Vector vel){
 		
 		this.pos = pos;
@@ -29,7 +36,7 @@ public class Entity {
 		pos = Vector.add(pos, Vector.mult(vel, Main.fps));
 	}
 	
-	public void draw(Graphics g){
+	public void draw(Graphics2D g){
 		g.setColor(Color.RED);
 		g.fillRect((int)pos.x, (int)pos.y, width, height);
 	}

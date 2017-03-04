@@ -1,6 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 public class Shooter extends Entity{
 
@@ -8,17 +13,25 @@ public class Shooter extends Entity{
 	boolean moving = false;
 	Random rand = new Random();
 	
+	BufferedImage img;
+	
 	public Shooter(Vector pos) {
 		super(pos, new Vector(0,0,0));
 		this.id = 6;
 		this.enemy = true;
 		this.melee = true;
+		
+		try {
+		    img = ImageIO.read(getClass().getResource("Textures/Enemy2.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
 	}
 	
 	@Override
-	public void draw(Graphics g){
-		g.setColor(Color.CYAN);
-		g.fillOval((int)this.pos.x, (int)this.pos.y, this.width, this.height);
+	public void draw(Graphics2D g){
+		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 	@Override
