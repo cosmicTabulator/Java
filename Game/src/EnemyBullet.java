@@ -1,11 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Bullet extends Entity{
+public class EnemyBullet extends Entity{
 
-	public Bullet(Vector pos, Vector vel) {
+	public EnemyBullet(Vector pos, Vector vel) {
 		super(pos, vel);
-		this.id = 2;
+		this.id = 4;
+		this.melee = true;
 	}
 
 	@Override
@@ -21,7 +22,7 @@ public class Bullet extends Entity{
 	
 	@Override
 	public void draw(Graphics g){
-		g.setColor(Color.YELLOW);
+		g.setColor(Color.GREEN);
 		g.fillRect((int)pos.x, (int)pos.y, 3, 5);
 	}
 	

@@ -1,3 +1,11 @@
 /Screen$1.class
 /Player.class
 /Bullet.class
+/Enemy.class
+/EnemyBullet.class
+/World.class
+/Entity.class
+/Seeker.class
+/Main$stage.class
+/Main$Level.class
+/Shooter.class

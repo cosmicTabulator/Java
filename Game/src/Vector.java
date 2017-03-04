@@ -57,4 +57,30 @@ public class Vector {
 	public void print(){
 		System.out.println(this.x + ", " + this.y + ", " + this.z);
 	}
+	
+	public static Vector reduce(Vector a){
+		
+		//WARNING! DOES NOT WORK WITH Z
+		
+		Vector r;
+		if(a.x == 0 || a.y == 0){
+			if(a.x != 0){
+				r = new Vector(1,0,0);
+			}
+			else if (a.y != 0){
+				r = new Vector(0,1,0);
+			}
+			else{
+				r = new Vector(0,0,0);
+			}
+		}
+		else if(Math.abs(a.x) > Math.abs(a.y)){
+			r = Vector.mult(a, Math.abs(1/a.x));
+		}
+		else{
+			r = Vector.mult(a, Math.abs(1/a.y));
+		}
+		
+		return r;
+	}
 }
