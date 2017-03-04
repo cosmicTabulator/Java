@@ -1,4 +1,6 @@
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -21,6 +23,10 @@ public class Screen{
 		frame = new JFrame();
 		frame.setSize(width, hieght);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		
 		image = new BufferedImage(width, hieght, BufferedImage.TYPE_INT_RGB);
 		pane = new JLabel(new ImageIcon(image));
 		

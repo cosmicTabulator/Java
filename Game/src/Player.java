@@ -6,6 +6,8 @@ public class Player extends Entity{
 	int lastSpawn = 0;
 	int lastSpawnEnemy;
 	int fireRate = 5;
+	boolean shieldUse = false;
+	boolean shield = false;
 	
 	public Player(Vector pos, Vector vel) {
 		super(pos, vel);
@@ -36,6 +38,14 @@ public class Player extends Entity{
 		}
 		else{
 			vel.y = lerp(vel.y, 0, c);
+		}
+		
+		if(s.contains(KeyEvent.VK_F) && !shield && shieldUse){
+			
+			Main.addObject(new Shield(new Vector(pos.x, pos.y, 0)));
+			shield = true;
+			shieldUse = false;
+			
 		}
 		
 		if(s.contains(KeyEvent.VK_SPACE) && ticks - lastSpawn > fireRate){
@@ -77,7 +87,7 @@ public class Player extends Entity{
 		}
 		
 		for(Entity o : collided(this)){
-			if(o.melee){
+			if(o.melee && !shield){
 				kill();
 				break;
 			}

@@ -78,18 +78,12 @@ public class Entity {
 		}
 	}
 	
-	boolean inBounds(Entity o, float x, float y, float f, float g){
+	boolean inBounds(Entity o, float x1, float y1, float x2, float y2){
 		
 		boolean out = false;
-		List<Vector> points = new ArrayList<Vector>();
-		points.add(new Vector(o.pos.x, o.pos.y, 0));
-		points.add(new Vector(o.pos.x + o. width, o.pos.y, 0));
-		points.add(new Vector(o.pos.x, o.pos.y + o.height, 0));
-		points.add(new Vector(o.pos.x + o.width, o.pos.y + o.height, 0));
-		for(Vector v : points){
-			if(v.x > x && v.x < f && v.y > y && v.y < g){
-				out = true;
-			}
+		
+		if(o.pos.x < x2 && o.pos.x + o.width > x1 && o.pos.y < y2 && o.pos.y + o.height > y1){
+			out = true;
 		}
 		
 		return out;

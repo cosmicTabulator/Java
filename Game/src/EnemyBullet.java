@@ -7,6 +7,8 @@ public class EnemyBullet extends Entity{
 		super(pos, vel);
 		this.id = 4;
 		this.melee = true;
+		this.width = 3;
+		this.height = 5;
 	}
 
 	@Override
@@ -22,8 +24,8 @@ public class EnemyBullet extends Entity{
 	
 	@Override
 	public void draw(Graphics g){
-		g.setColor(Color.GREEN);
-		g.fillRect((int)pos.x, (int)pos.y, 3, 5);
+		g.setColor(Color.MAGENTA);
+		g.fillRect((int)pos.x, (int)pos.y, width, height);
 	}
 	
 }
