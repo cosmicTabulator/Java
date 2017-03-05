@@ -11,31 +11,31 @@ import org.json.JSONObject;
 
 /*
  * Created by cosmicTabulator (cT)
- * Friday March 4, 2017
+ * Sunday March 5, 2017
  * 
- * V0.1.5
- * +Added a file save system and persistent High Scores
- * *Moved Score to Left side of Screen
- * *Fixed Bug with Shield Image File
- * *Fixed Shield Positioning
+ * V0.1.6
+ * +Added Beamers and Beams
+ * *Changed around level events and spawn rates
+ * *Fixed Dodger bullet speed
+ * *Made Rotation Possible
+ * *Re-did collisions using AWT Shapes
+ * *Fixed bullet Rotation
  * 
- * ~I'm going to implement a Menu screen in the next version. Probably.
+ * ~Nope.
  * 
  */
 
 
 public class Main {
 	
-	public static final String version = "0.1.5";
+	public static final String version = "0.1.6";
 	
 	public static int score = 0;
 	public static int highScore = 0;
 	boolean scoreSaved = false;
 	boolean highscored = false;
-	static boolean adding = false;
 	public static Screen screen;
 	static float screenScale = 2;
-	public boolean running = true;
 	static int time;
 	int lastTick;
 	int timer;
@@ -92,7 +92,7 @@ public class Main {
 	
 	private void mainLoop(Screen screen){
 		lastTick = (int) System.currentTimeMillis();
-		while(running){
+		while(true){
 			time = (int) System.currentTimeMillis();
 //			if(Screen.keys.contains(KeyEvent.VK_ESCAPE) && !paused){
 //				paused = true;
@@ -199,9 +199,23 @@ public class Main {
 				spawnTime = rate(level);
 				timer = 0;
 				spawnTotal++;
-				if(level > 5){
-					if(rand.nextInt(10) > 8){
+				if(level > 8){
+					if(rand.nextInt(20) > 18){
 						addObject(new Dodger(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
+					}
+					else if(rand.nextInt(10) > 7){
+						addObject(new Beamer(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
+					}
+					else if(rand.nextInt(10) > 4){
+						addObject(new Shooter(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
+					}
+					else{
+						addObject(new Seeker(new Vector(rand.nextInt(260) + 60, 0, 0)));
+					}
+				}
+				else if(level > 5){
+					if(rand.nextInt(10) > 8){
+						addObject(new Beamer(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
 					}
 					else if(rand.nextInt(10) > 4){
 						addObject(new Shooter(new Vector(rand.nextInt(260) + 60, rand.nextInt(25) + 25, 0)));
@@ -249,7 +263,7 @@ public class Main {
 
 	private int rate(int level) {
 		int out;
-		if(level > 9){
+		if(level > 7){
 			out = rand.nextInt(10) + 10;
 		}
 		else if(level > 4){

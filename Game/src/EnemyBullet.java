@@ -1,10 +1,10 @@
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 public class EnemyBullet extends Entity{
-
 	
 	public EnemyBullet(Vector pos, Vector vel) {
 		super(pos, vel);
@@ -24,6 +24,30 @@ public class EnemyBullet extends Entity{
 	@Override
 	public void onTick(int ticks){
 		
+//		if(vel.x != 0 && vel.y > 0){
+//			rot = Math.atan(vel.y/vel.x);
+//		}
+//		else if(vel.x != 0 && vel.y < 0){
+//			rot = Math.atan(vel.y/vel.x);
+//			if(vel.x > 0){
+//				rot = rot + Math.PI;
+//			}
+//			else{
+//				rot = rot - Math.PI;
+//			}
+//		}
+//		else{
+//			if(-vel.y > 0){
+//				rot = Math.PI/2;
+//			}
+//			else{
+//				rot = -Math.PI/2;
+//			}
+//		}
+//		
+		
+		rot = - Math.atan2(vel.x,vel.y);
+		
 		this.ticks = ticks;
 		
 		if(pos.y > 300 || pos.y < 0 || pos.x > 400 || pos.x < 0){
@@ -34,7 +58,14 @@ public class EnemyBullet extends Entity{
 	
 	@Override
 	public void draw(Graphics2D g){
-		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
+		
+		AffineTransform identity = new AffineTransform();
+		AffineTransform trans = new AffineTransform();
+		trans.setTransform(identity);
+		trans.setToTranslation(pos.x, pos.y);
+		trans.rotate(rot);
+		g.drawImage(img, trans, null);
+
+		}
 	}
 	
-}

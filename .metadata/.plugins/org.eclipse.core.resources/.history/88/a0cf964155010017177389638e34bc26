@@ -1,0 +1,39 @@
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+public class Beam extends Entity{
+
+	Bobber parent;
+	
+	public Beam(Vector pos, Bobber b) {
+		super(pos, new Vector(0,0,0));
+		
+		this.id = 8;
+		this.melee = true;
+		this.width = 3;
+		this.height = 500;
+		this.parent = b;
+		
+		try {
+		    img = ImageIO.read(getClass().getResource("Textures/Bullet2.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
+		
+	}
+	
+	@Override
+	public void draw(Graphics2D g){
+		
+	}
+	
+	@Override
+	public void AI(int ticks){
+		if(!this.parent.shooting){
+			this.kill();
+		}
+	}
+
+}

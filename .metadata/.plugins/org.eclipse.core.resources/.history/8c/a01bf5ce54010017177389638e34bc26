@@ -1,0 +1,14 @@
+
+public class Beam extends Entity{
+
+	public Beam(Vector pos) {
+		super(pos, new Vector(0,0,0));
+		
+		this.id = 8;
+		this.melee = true;
+		this.width = 3;
+		this.height = 500;
+		
+	}
+
+}

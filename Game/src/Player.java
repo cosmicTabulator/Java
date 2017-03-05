@@ -1,4 +1,3 @@
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Set;
@@ -52,6 +51,11 @@ public class Player extends Entity{
 			vel.y = lerp(vel.y, 0, c);
 		}
 		
+		if(s.contains(KeyEvent.VK_E) && ticks - lastSpawnEnemy > 20){
+			Main.addObject(new Beamer(new Vector(pos.x, pos.y - 50, 0)));
+			lastSpawnEnemy = ticks;
+		}
+		
 		if(s.contains(KeyEvent.VK_F) && !shield && shieldUse){
 			
 			Main.addObject(new Shield(new Vector(pos.x, pos.y, 0)));
@@ -65,11 +69,6 @@ public class Player extends Entity{
 			lastSpawn = ticks;
 		}
 		
-	}
-	
-	@Override
-	public void draw(Graphics2D g){
-		g.drawImage(this.img, (int)this.pos.x, (int)this.pos.y, width, height, null);
 	}
 	
 	@Override

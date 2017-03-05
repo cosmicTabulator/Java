@@ -1,5 +1,3 @@
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
@@ -10,8 +8,6 @@ public class Shooter extends Entity{
 	int timer;
 	boolean moving = false;
 	Random rand = new Random();
-	
-	BufferedImage img;
 	
 	public Shooter(Vector pos) {
 		super(pos, new Vector(0,0,0));
@@ -25,11 +21,6 @@ public class Shooter extends Entity{
 			System.out.println(this);
 			System.out.println(e);
 		}
-	}
-	
-	@Override
-	public void draw(Graphics2D g){
-		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 	@Override
@@ -55,7 +46,7 @@ public class Shooter extends Entity{
 			moving = false;
 			this.vel.x = 0;
 			this.vel.y = 0;
-			if(Main.level > 7){
+			if(Main.level > 6){
 			
 				Main.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
 				Main.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));

@@ -1,5 +1,3 @@
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -8,8 +6,6 @@ public class Seeker extends Entity{
 
 	int spawnTime;
 	int speed = 100;
-	
-	BufferedImage img;
 	
 	public Seeker(Vector pos) {
 		super(pos, new Vector(0,0,0));
@@ -24,11 +20,6 @@ public class Seeker extends Entity{
 			System.out.println(this);
 			System.out.println(e);
 		}
-	}
-	
-	@Override
-	public void draw(Graphics2D g){
-		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 	@Override

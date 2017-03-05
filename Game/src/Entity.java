@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +27,9 @@ public class Entity {
 	double rot = 0;
 	boolean melee = false;
 	boolean enemy = false;
+	boolean useRect = true;
+	
+	Rectangle2D shape;
 	
 	BufferedImage img;
 	
@@ -30,6 +37,7 @@ public class Entity {
 		
 		this.pos = pos;
 		this.vel = vel;
+		
 	}
 	
 	public void getPos(){
@@ -37,8 +45,12 @@ public class Entity {
 	}
 	
 	public void draw(Graphics2D g){
-		g.setColor(Color.RED);
-		g.fillRect((int)pos.x, (int)pos.y, width, height);
+		AffineTransform identity = new AffineTransform();
+		AffineTransform trans = new AffineTransform();
+		trans.setTransform(identity);
+		trans.setToTranslation(pos.x, pos.y);
+		trans.rotate(Math.toRadians(rot));
+		g.drawImage(img, trans, null);
 	}
 	
 	public void checkActionMap(Set<Integer> s){
@@ -85,13 +97,41 @@ public class Entity {
 		}
 	}
 	
-	boolean inBounds(Entity o, float x1, float y1, float x2, float y2){
+	boolean inBounds(Entity o, Entity e){
 		
 		boolean out = false;
 		
-		if(o.pos.x < x2 && o.pos.x + o.width > x1 && o.pos.y < y2 && o.pos.y + o.height > y1){
-			out = true;
-		}
+//		if(o.pos.x < x2 && o.pos.x + o.width > x1 && o.pos.y < y2 && o.pos.y + o.height > y1){
+//			out = true;
+//		}
+		AffineTransform identity = new AffineTransform();
+		
+		Shape rect1 = new Rectangle2D.Float(o.pos.x, o.pos.y, o.width, o.height);
+		
+
+		AffineTransform trans1 = new AffineTransform();
+		
+		trans1.setTransform(identity);
+		trans1.rotate(Math.toRadians(o.rot));
+		
+		rect1 = trans1.createTransformedShape(rect1);
+		
+		Shape rect2 = new Rectangle2D.Float(e.pos.x, e.pos.y, e.width, e.height);
+		
+
+		AffineTransform trans2 = new AffineTransform();
+		
+		trans2.setTransform(identity);
+		trans2.rotate(Math.toRadians(o.rot));
+		
+		rect2 = trans2.createTransformedShape(rect2);
+		
+		Area a1 = new Area(rect1);
+		Area a2 = new Area(rect2);
+		
+		a1.intersect(a2);
+		
+		out = !a1.isEmpty();
 		
 		return out;
 		
@@ -101,7 +141,7 @@ public class Entity {
 		List<Entity> s = new ArrayList<Entity>();
 		
 		for (Entity o : Main.objects){
-			if(inBounds(o, c.pos.x, c.pos.y, c.pos.x + c.height, c.pos.y + c.width)){
+			if(inBounds(o, c)){
 				s.add(o);
 			}
 		}
@@ -112,7 +152,7 @@ public class Entity {
 	boolean isCollided(int id, Entity c){
 		boolean out = false;
 		for(Entity o : Main.objects){
-			if(inBounds(o, c.pos.x, c.pos.y, c.pos.x + c.height, c.pos.y + c.width)){
+			if(inBounds(o, c)){
 				if(o.id == id){
 					out = true;
 				}

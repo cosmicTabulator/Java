@@ -40,7 +40,7 @@ public class Shield extends Entity{
 		List<Entity> collide = collided(this);
 		
 		for(Entity o : collide){
-			if(o.enemy || o.melee){
+			if(o.enemy || o.melee && o.id != 8){
 				o.kill();
 				this.kill();
 				Main.player.shield = false;

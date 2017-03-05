@@ -1,4 +1,3 @@
-import java.awt.Graphics2D;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -28,11 +27,6 @@ public class Bullet extends Entity{
 			kill();
 		}
 		
-	}
-	
-	@Override
-	public void draw(Graphics2D g){
-		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 }

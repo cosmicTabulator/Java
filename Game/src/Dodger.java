@@ -1,4 +1,3 @@
-import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.Random;
 
@@ -22,11 +21,6 @@ public class Dodger extends Entity{
 			System.out.println(this);
 			System.out.println(e);
 		}
-	}
-	
-	@Override
-	public void draw(Graphics2D g){
-		g.drawImage(img, (int) pos.x, (int) pos.y, width, height, null);
 	}
 	
 	@Override
@@ -83,7 +77,7 @@ public class Dodger extends Entity{
 			this.vel = Vector.mult(dir, 100);
 		}
 		if(ticks - lastShot > nextShot){
-			Main.addObject(new EnemyBullet(new Vector(this.pos.x, this.pos.y + width + 5, 0), new Vector(0, 400, 0)));
+			Main.addObject(new EnemyBullet(new Vector(this.pos.x, this.pos.y + width + 5, 0), new Vector(0, 200, 0)));
 			nextShot = rand.nextInt(10) + rand.nextInt(20);
 			lastShot = ticks;
 			//System.out.println("Shot");
