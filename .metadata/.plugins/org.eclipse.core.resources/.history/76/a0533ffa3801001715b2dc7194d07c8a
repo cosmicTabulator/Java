@@ -1,0 +1,18 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class Leaderboards {
+
+	JSONObject boards;
+	
+	Leaderboards(JSONObject obj){
+		
+		this.boards = obj;
+		
+	}
+	
+	public void getHighScore(){
+		JSONArray scores = boards.getJSONArray("highscores");
+	}
+	
+}

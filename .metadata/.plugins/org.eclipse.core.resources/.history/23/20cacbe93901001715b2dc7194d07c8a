@@ -1,0 +1,43 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class Leaderboards {
+
+	JSONObject boards;
+	JSONArray scores;
+	
+	Leaderboards(JSONObject obj){
+		
+		this.boards = obj;
+		scores = boards.getJSONArray("highscores");
+		
+	}
+	
+	public int getHighScore(){
+		int highscore = scores.getJSONObject(0).getInt("score");
+		return highscore;
+	}
+	
+	public void addScore(int score){
+		
+		boolean notPlaced = true;
+		
+		int i = 0;
+		
+		while(notPlaced){
+			
+			if(score > scores.getJSONObject(0).getInt("score")){
+				
+				JSONObject obj = new JSONObject();
+				obj.put("score", score);
+				obj.put("rank", i+1);
+				
+				scores.put(i, obj);
+				
+				notPlaced = false;
+			}
+			
+		}
+	}
+	
+}

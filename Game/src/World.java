@@ -12,7 +12,8 @@ public class World {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 400, 300);
 		g.setColor(Color.WHITE);
-		drawCenter(Integer.toString(Main.score), 50, g);
+		String sNum = Integer.toString(Main.score);
+		g.drawString(sNum, 390 - g.getFontMetrics().stringWidth(sNum), 20);
 		if(Main.player.shieldUse){
 			g.drawString("Shield Available!", 20, 20);
 		}

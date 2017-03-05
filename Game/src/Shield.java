@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.List;
@@ -15,7 +13,7 @@ public class Shield extends Entity{
 		this.height = 3;
 		
 		try {
-		    img = ImageIO.read(getClass().getResource("Textures/Sheild.png"));
+		    img = ImageIO.read(getClass().getResource("Textures/Shield.png"));
 		} catch (IOException e) {
 			System.out.println(this);
 			System.out.println(e);
@@ -32,7 +30,7 @@ public class Shield extends Entity{
 	@Override
 	public void getPos() {
 		
-		this.pos.x = Main.player.pos.x;
+		this.pos.x = (int)(Main.player.pos.x - ((this.width-Main.player.width)/2));
 		this.pos.y = Main.player.pos.y - 10;
 		
 	}

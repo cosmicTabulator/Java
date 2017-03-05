@@ -7,25 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.json.JSONObject;
+
 /*
  * Created by cosmicTabulator (cT)
- * Friday March 3, 2017
+ * Friday March 4, 2017
  * 
- * V0.1.4
- * +Added Sprites to all entities
- * *Fixed Bullet sizing
+ * V0.1.5
+ * +Added a file save system and persistent High Scores
+ * *Moved Score to Left side of Screen
+ * *Fixed Bug with Shield Image File
+ * *Fixed Shield Positioning
  * 
- * ~A binary Abacus, the most tedious device
+ * ~I'm going to implement a Menu screen in the next version. Probably.
  * 
  */
 
 
 public class Main {
 	
-	public static final String version = "0.1.4";
+	public static final String version = "0.1.5";
 	
 	public static int score = 0;
 	public static int highScore = 0;
+	boolean scoreSaved = false;
+	boolean highscored = false;
 	static boolean adding = false;
 	public static Screen screen;
 	static float screenScale = 2;
@@ -48,7 +54,8 @@ public class Main {
 	static List<Entity> newObjects = new ArrayList<Entity>();
 	static Player player;
 	static World world;
-	//static FileHandler fh;
+	static FileHandler fh;
+	Leaderboards lb;
 	boolean spawned = false;
 	
 	Random rand = new Random();
@@ -65,12 +72,15 @@ public class Main {
 		
 		objects.add(player);
 		
+		fh = new FileHandler("highscore.json");
+		
+		JSONObject scores = fh.read();
+
+		lb = new Leaderboards(scores);
+		
+		highScore = lb.getHighScore();
+		
 		mainLoop(screen);
-		
-		//fh = new FileHandler("highscore.txt");
-		
-		//fh.check();
-		//highScore = Integer.parseInt(fh.read());
 		
 		
 	}
@@ -114,6 +124,13 @@ public class Main {
 		g.scale(screenScale, screenScale);
 		world.draw(g);
 		if(!objects.contains(player)){
+			if(!scoreSaved){
+				
+				lb.addScore(score);
+				fh.write(lb.get());
+				scoreSaved = true;
+				
+			}
 			levelSplash = false;
 			newObjects.clear();
 			drawKillScreen(g);
@@ -123,11 +140,9 @@ public class Main {
 				stageTicks = 0;
 				spawned = false;
 				level = 0;
-				if(score > highScore){
-					highScore = score;
-					//fh.write(Integer.toString(highScore));
-				}
 				score = 0;
+				highscored = false;
+				scoreSaved = false;
 			}
 		}
 		eventSequence();
@@ -250,7 +265,9 @@ public class Main {
 	void drawKillScreen(Graphics g){
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
-		if(score > highScore){
+		if(score > highScore || highscored){
+			highscored = true;
+			highScore = score;
 			world.drawCenter("New Highscore! " + score, 140, g);
 		}
 		else{
