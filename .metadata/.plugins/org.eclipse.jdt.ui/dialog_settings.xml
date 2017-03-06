@@ -4,6 +4,9 @@
 	<item value="filter_imports;" key="filters_last_used"/>
 	<item value="480,442" key="UserLibraryLoadSaveDialog.size"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+		<item value="false" key="renameSubpackages"/>
+		<item value="false" key="updateQualifiedNames"/>
+		<item value="*" key="patterns"/>
 		<item value="false" key="updateSimilarElements"/>
 		<item value="1" key="updateSimilarElementsMatchStrategy"/>
 		<item value="false" key="updateTextualMatches"/>
@@ -29,10 +32,11 @@
 	<section name="FatJarPackageWizard">
 		<item value="/Users/grahamcooke/Desktop/Java" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="Main - Game" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="/Users/grahamcooke/Desktop/Java/Game v0.1.6.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="/Users/grahamcooke/Desktop/Java/Game v0.1.6.1.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="2" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/Users/grahamcooke/Desktop/Java/Game v0.1.6.1.jar"/>
 			<item value="/Users/grahamcooke/Desktop/Java/Game v0.1.6.jar"/>
 			<item value="/Users/grahamcooke/Desktop/Java/Game v0.1.5.jar"/>
 			<item value="/Users/grahamcooke/Desktop/Java/Game v0.1.4.1.jar"/>
