@@ -93,8 +93,6 @@ public class Menu {
 			moveTime = Main.ticks;
 		}
 		
-		System.out.println(index);
-		
 		for (Button b : buttons){
 			if(b.index == this.index && b.state != State.DISABLED){
 				b.state = State.SELECTED;

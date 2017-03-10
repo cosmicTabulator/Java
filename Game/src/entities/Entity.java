@@ -35,6 +35,7 @@ public class Entity {
 	boolean melee = false;
 	public boolean enemy = false;
 	boolean useRect = true;
+	boolean isBoss = false;
 	
 	Rectangle2D shape;
 	
@@ -81,14 +82,14 @@ public class Entity {
 		
 	}
 	
-	float lerp(float value, float target, float weight){
+	double lerp(double value, double target, double weight){
 		
-		float out = (value + target*weight)/(1 + weight);
+		double out = (value + target*weight)/(1 + weight);
 		
 		return out;
 	}
 	
-	Vector lerp(Vector value, Vector target, float c) {
+	Vector lerp(Vector value, Vector target, double c) {
 
 		Vector out;
 		
@@ -113,7 +114,7 @@ public class Entity {
 //		}
 		AffineTransform identity = new AffineTransform();
 		
-		Shape rect1 = new Rectangle2D.Float(o.pos.x, o.pos.y, o.width, o.height);
+		Shape rect1 = new Rectangle2D.Double(o.pos.x, o.pos.y, o.width, o.height);
 		
 
 		AffineTransform trans1 = new AffineTransform();
@@ -123,7 +124,7 @@ public class Entity {
 		
 		rect1 = trans1.createTransformedShape(rect1);
 		
-		Shape rect2 = new Rectangle2D.Float(e.pos.x, e.pos.y, e.width, e.height);
+		Shape rect2 = new Rectangle2D.Double(e.pos.x, e.pos.y, e.width, e.height);
 		
 
 		AffineTransform trans2 = new AffineTransform();
@@ -172,8 +173,8 @@ public class Entity {
 	
 	Entity closest(Entity o, int[] idArray, boolean ignore){
 		
-		float x;
-		float y;
+		double x;
+		double y;
 		double h;
 		double closestDist = Double.MAX_VALUE;
 		Entity closest = null;

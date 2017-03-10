@@ -1,0 +1,90 @@
+package entities;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import main.Main;
+import main.Vector;
+
+public class SpiralBullet extends Entity{
+	
+	private int localTime;
+	private Vector origin;
+	private double theta;
+	
+	public SpiralBullet(Vector o, double th) {
+		super(o, new Vector(0,0,0));
+		this.id = 4;
+		this.melee = true;
+		this.width = 3;
+		this.height = 5;
+		this.origin = o;
+		this.theta = th;
+		localTime = 0;
+		
+		try {
+		    img = ImageIO.read(getClass().getResource("/Textures/Bullet2.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
+	}
+
+	@Override
+	public void onTick(int ticks){
+		
+		rot = - Math.atan2(vel.x,vel.y);
+		
+		this.ticks = ticks;
+		
+		AI(ticks);
+		
+	}
+	
+	@Override
+	public void AI(int ticks){
+		localTime++;
+		this.vel.y = (float) (localTime * Math.cos((float)localTime/100) + Math.sin((float)localTime/100));
+		this.vel.x = (float) (Math.cos((float)localTime/100) - localTime * Math.sin((float)localTime/100));
+
+		
+		
+//		vel.print();
+		
+//		pos.x = (float) (Math.exp((float)localTime/100) * Math.cos((float)localTime/100)) + origin.x;
+//		pos.y = (float) (Math.exp((float)localTime/100) * Math.sin((float)localTime/100)) + origin.y;
+		
+//		pos.x = (float) (localTime * Math.cos((float)localTime/100)) + origin.x;
+//		pos.y = (float) (localTime * Math.sin((float)localTime/100)) + origin.y;
+		
+		if(pos.y > 300 || pos.y < 0 || pos.x > 400 || pos.x < 0){
+			kill();
+		}
+	}
+	
+	@Override
+	public void draw(Graphics2D g){
+		AffineTransform identity = new AffineTransform();
+		AffineTransform trans = new AffineTransform();
+		trans.setTransform(identity);
+		trans.setToTranslation(pos.x, pos.y);
+		trans.rotate(rot);
+		g.drawImage(img, trans, null);
+
+		}
+	
+	private Vector rotate(Vector v, double theta){
+		
+		Vector out = new Vector(0,0,0);
+		
+		out.x = (float) (v.x * Math.cos(theta) - v.y * Math.sin(theta));
+		out.y = (float) (v.x * Math.sin(theta) - v.y * Math.cos(theta));
+		
+		return out;
+		
+	}
+	
+	}
+	

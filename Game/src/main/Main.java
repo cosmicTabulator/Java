@@ -1,7 +1,6 @@
 package main;
 import gui.Arcade;
 import gui.Menu;
-import main.Tree.Node;
 
 /*
  * Created by cosmicTabulator (cT)
@@ -48,12 +47,7 @@ public class Main {
 
 		arcade = new Arcade();
 		
-		//mainLoop(screen);
-		
-		Tree<Integer> tree = new Tree<Integer>(0);
-		tree.root.addChild(3);
-		tree.root.addChild(4);
-		tree.search(3);
+		mainLoop(screen);
 	}
 	
 	public static void main(String[] args) {

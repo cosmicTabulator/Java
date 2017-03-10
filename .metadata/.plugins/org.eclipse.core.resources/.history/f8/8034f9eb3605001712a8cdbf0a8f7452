@@ -1,0 +1,66 @@
+package entities;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import main.Main;
+import main.Vector;
+
+public class SpiralBullet extends Entity{
+	
+	private int localTime;
+	
+	public SpiralBullet(Vector pos, Vector vel) {
+		super(pos, vel);
+		this.id = 4;
+		this.melee = true;
+		this.width = 3;
+		this.height = 5;
+		localTime = Main.ticks;
+		
+		try {
+		    img = ImageIO.read(getClass().getResource("/Textures/Bullet2.png"));
+		} catch (IOException e) {
+			System.out.println(this);
+			System.out.println(e);
+		}
+	}
+
+	@Override
+	public void onTick(int ticks){
+		
+		rot = - Math.atan2(vel.x,vel.y);
+		
+		this.ticks = ticks;
+		
+		AI(ticks);
+		
+	}
+	
+	@Override
+	public void AI(int ticks){
+		localTime++;
+		float t = (float)(localTime/10);
+		this.vel.y = (float) (t * Math.cos(t) + Math.sin(t));
+		this.vel.x = (float) (Math.cos(t) - t * Math.sin(t));
+		vel.print();
+		
+		if(pos.y > 300 || pos.y < 0 || pos.x > 400 || pos.x < 0){
+			kill();
+		}
+	}
+	
+	@Override
+	public void draw(Graphics2D g){
+		AffineTransform identity = new AffineTransform();
+		AffineTransform trans = new AffineTransform();
+		trans.setTransform(identity);
+		trans.setToTranslation(pos.x, pos.y);
+		trans.rotate(rot);
+		g.drawImage(img, trans, null);
+
+		}
+	}
+	

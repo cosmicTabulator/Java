@@ -2,11 +2,11 @@ package main;
 
 public class Vector {
 
-	public float x;
-	public float y;
-	public float z;
+	public double x;
+	public double y;
+	public double z;
 	
-	public Vector(float x, float y, float z){
+	public Vector(double x, double y, double z){
 		
 		this.x = x;
 		this.y = y;
@@ -16,23 +16,34 @@ public class Vector {
 	
 	public static Vector add(Vector a, Vector b){
 		
-		float x = a.x + b.x;
-		float y = a.y + b.y;
-		float z = a.z + b.z;
+		double x = a.x + b.x;
+		double y = a.y + b.y;
+		double z = a.z + b.z;
 		
 		Vector c = new Vector(x, y, z);
 		
 		return c;
 	}
 	
-	public static Vector mult(Vector a, float n){
+	public static Vector mult(Vector a, double n){
 		
-		float x = a.x * n;
-		float y = a.y * n;
-		float z = a.z * n;
+		double x = a.x * n;
+		double y = a.y * n;
+		double z = a.z * n;
 		
 		Vector c = new Vector(x,y,z);
 		return c;
+	}
+	
+	public static Vector mult(Vector v, Matrix m){
+		
+		Vector out = new Vector(0,0,0);
+		
+		out.x = v.x * m.a + v.y * m.b;
+		out.y = v.x * m.c + v.y * m.d;
+		
+		return out;
+		
 	}
 	
 	public Vector cross(Vector a, Vector b){

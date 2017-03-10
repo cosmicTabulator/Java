@@ -57,7 +57,7 @@ public class Player extends Entity{
 		}
 		
 		if(s.contains(KeyEvent.VK_E) && ticks - lastSpawnEnemy > 20){
-			Arcade.addObject(new Beamer(new Vector(pos.x, pos.y - 50, 0)));
+			Arcade.addObject(new Boss1(new Vector(pos.x, pos.y - 50, 0)));
 			lastSpawnEnemy = ticks;
 		}
 		

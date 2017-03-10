@@ -105,17 +105,17 @@ public class Arcade {
 				scoreSaved = false;
 			}
 		}
-		eventSequence();
+		//eventSequence();
 		for(Entity o : objects){
 			o.onTick(Main.ticks);
 			o.getPos();
 			o.draw(g);
 		}
-		if(levelSplash){
-			g.setColor(Color.WHITE);
-			g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
-			world.drawCenter("Level " + level, 150, g);
-		}
+//		if(levelSplash){
+//			g.setColor(Color.WHITE);
+//			g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+//			world.drawCenter("Level " + level, 150, g);
+//		}
 		g.dispose();
 		Screen.pane.repaint();
 		objects.clear();
