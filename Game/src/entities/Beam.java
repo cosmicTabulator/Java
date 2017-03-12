@@ -50,7 +50,7 @@ public class Beam extends Entity{
 	
 	@Override
 	public void AI(int ticks){
-		if(!this.parent.shooting){
+		if(!this.parent.shooting || this.parent.dead){
 			this.kill();
 		}
 	}

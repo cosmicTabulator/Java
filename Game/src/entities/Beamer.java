@@ -15,6 +15,7 @@ public class Beamer extends Entity{
 	int timer;
 	int frequency;
 	boolean shooting = false;
+	boolean dead = false;
 	
 	public Beamer(Vector pos) {
 		super(pos, new Vector(0,0,0));
@@ -87,6 +88,7 @@ public class Beamer extends Entity{
 		
 		if(isCollided(2, this)){
 			kill();
+			this.dead = true;
 			Arcade.score = Arcade.score + 40;
 		}
 

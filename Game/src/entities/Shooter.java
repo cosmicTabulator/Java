@@ -52,21 +52,30 @@ public class Shooter extends Entity{
 			this.vel.y = 0;
 			if(Arcade.level > 6){
 			
-				Arcade.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(200, -200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, -200, 0)));
+				for(int i = 0; i < 8; i++){
+					Arcade.addObject(new EnemyBullet(this.pos, i*Math.PI/4, 200));
+				}
+				
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, -200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, -200, 0)));
 				
 			}
 			else{
-				Arcade.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
-				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
+				
+				for(int i = 0; i < 4; i++){
+					Arcade.addObject(new EnemyBullet(this.pos, i*Math.PI/2, 200));
+				}
+				
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
+//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
 			}
 		}
 		

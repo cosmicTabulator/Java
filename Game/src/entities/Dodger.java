@@ -81,7 +81,7 @@ public class Dodger extends Entity{
 			this.vel = Vector.mult(dir, 100);
 		}
 		if(ticks - lastShot > nextShot){
-			Arcade.addObject(new EnemyBullet(new Vector(this.pos.x, this.pos.y + width + 5, 0), new Vector(0, 200, 0)));
+			Arcade.addObject(new EnemyBullet(this.pos, 0, 200));
 			nextShot = rand.nextInt(10) + rand.nextInt(20);
 			lastShot = ticks;
 			//System.out.println("Shot");

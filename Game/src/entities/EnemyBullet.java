@@ -5,16 +5,24 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import main.Matrix;
 import main.Vector;
 
 public class EnemyBullet extends Entity{
 	
-	public EnemyBullet(Vector pos, Vector vel) {
-		super(pos, vel);
+	double theta;
+	double v;
+	Matrix mult;
+	
+	public EnemyBullet(Vector o, double th, double v) {
+		super(o, new Vector(0,0,0));
 		this.id = 4;
 		this.melee = true;
 		this.width = 3;
 		this.height = 5;
+		this.theta = th;
+		this.v = v;
+		mult = new Matrix(Math.cos(theta), -Math.sin(theta), Math.sin(theta), Math.cos(theta));
 		
 		try {
 		    img = ImageIO.read(getClass().getResource("/Textures/Bullet2.png"));
@@ -27,28 +35,6 @@ public class EnemyBullet extends Entity{
 	@Override
 	public void onTick(int ticks){
 		
-//		if(vel.x != 0 && vel.y > 0){
-//			rot = Math.atan(vel.y/vel.x);
-//		}
-//		else if(vel.x != 0 && vel.y < 0){
-//			rot = Math.atan(vel.y/vel.x);
-//			if(vel.x > 0){
-//				rot = rot + Math.PI;
-//			}
-//			else{
-//				rot = rot - Math.PI;
-//			}
-//		}
-//		else{
-//			if(-vel.y > 0){
-//				rot = Math.PI/2;
-//			}
-//			else{
-//				rot = -Math.PI/2;
-//			}
-//		}
-//		
-		
 		rot = - Math.atan2(vel.x,vel.y);
 		
 		this.ticks = ticks;
@@ -57,6 +43,17 @@ public class EnemyBullet extends Entity{
 			kill();
 		}
 		
+		AI(ticks);
+		
+	}
+	
+	@Override
+	public void AI(int ticks){
+		
+		this.vel.y = 1;
+		this.vel.x = 0;
+		
+		this.vel = Vector.mult(Vector.mult(this.vel, mult), v);
 	}
 	
 	@Override

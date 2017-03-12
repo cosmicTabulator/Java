@@ -1,4 +1,5 @@
 package entities;
+
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
@@ -8,18 +9,20 @@ import javax.imageio.ImageIO;
 import main.Matrix;
 import main.Vector;
 
-public class SpiralBullet extends Entity{
-	
+public class PhaseBullet extends Entity{
+
 	private int localTime;
+	private Vector origin;
 	private double theta;
 	private Matrix mult;
 	
-	public SpiralBullet(Vector o, double th) {
+	public PhaseBullet(Vector o, double th) {
 		super(o, new Vector(0,0,0));
 		this.id = 4;
 		this.melee = true;
 		this.width = 3;
 		this.height = 5;
+		this.origin = o;
 		this.theta = th;
 		localTime = 0;
 		mult = new Matrix(Math.cos(theta), -Math.sin(theta), Math.sin(theta), Math.cos(theta));
@@ -46,9 +49,12 @@ public class SpiralBullet extends Entity{
 	@Override
 	public void AI(int ticks){
 		localTime++;
-		this.vel.y = (float) (localTime * Math.cos((float)localTime/100) + Math.sin((float)localTime/100));
-		this.vel.x = (float) (Math.cos((float)localTime/100) - localTime * Math.sin((float)localTime/100));
+//		this.vel.y = (float) (localTime * Math.cos((float)localTime/100) + Math.sin((float)localTime/100));
+//		this.vel.x = (float) (Math.cos((float)localTime/100) - localTime * Math.sin((float)localTime/100));
 
+		this.vel.y = 100 * Math.abs(Math.sin((float)localTime/10));
+		this.vel.x = 0;
+		
 		vel = Vector.mult(vel, mult);
 		
 //		vel.print();
@@ -75,5 +81,17 @@ public class SpiralBullet extends Entity{
 
 		}
 	
-}
+	private Vector rotate(Vector v, double theta){
+		
+		Vector out = new Vector(0,0,0);
+		
+		out.x = (v.x * Math.cos(theta) - v.y * Math.sin(theta));
+		out.y = (v.x * Math.sin(theta) - v.y * Math.cos(theta));
+		
+		return out;
+		
+	}
 	
+	
+
+}
