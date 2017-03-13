@@ -12,17 +12,15 @@ import main.Vector;
 public class PhaseBullet extends Entity{
 
 	private int localTime;
-	private Vector origin;
 	private double theta;
 	private Matrix mult;
 	
 	public PhaseBullet(Vector o, double th) {
-		super(o, new Vector(0,0,0));
+		super(o, new Vector(0,0));
 		this.id = 4;
 		this.melee = true;
 		this.width = 3;
 		this.height = 5;
-		this.origin = o;
 		this.theta = th;
 		localTime = 0;
 		mult = new Matrix(Math.cos(theta), -Math.sin(theta), Math.sin(theta), Math.cos(theta));
@@ -80,18 +78,5 @@ public class PhaseBullet extends Entity{
 		g.drawImage(img, trans, null);
 
 		}
-	
-	private Vector rotate(Vector v, double theta){
-		
-		Vector out = new Vector(0,0,0);
-		
-		out.x = (v.x * Math.cos(theta) - v.y * Math.sin(theta));
-		out.y = (v.x * Math.sin(theta) - v.y * Math.cos(theta));
-		
-		return out;
-		
-	}
-	
-	
 
 }

@@ -12,10 +12,9 @@ public class Beam extends Entity{
 	Beamer parent;
 	
 	public Beam(Vector pos, Beamer b) {
-		super(pos, new Vector(0,0,0));
+		super(pos, new Vector(0,0));
 		
 		this.id = 8;
-		this.enemy = true;
 		this.melee = true;
 		this.width = 3;
 		this.height = 300;

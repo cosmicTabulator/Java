@@ -19,6 +19,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
+//Base class for all entities
 @SuppressWarnings("unused")
 public class Entity {
 
@@ -42,22 +44,28 @@ public class Entity {
 	BufferedImage img;
 	
 	public Entity(Vector pos, Vector vel){
-		
+		//Get the position and velocity vector from the constructor
 		this.pos = pos;
 		this.vel = vel;
 		
 	}
 	
+	//Get the next position by adding the velocity vector (multiplied by the fraction of a second one tick covers) to the current position
 	public void getPos(){
 		pos = Vector.add(pos, Vector.mult(vel, Main.fps));
 	}
 	
+	//Draws the entity
 	public void draw(Graphics2D g){
+		//Create a transform to apply rotation and movement effects to our image
 		AffineTransform identity = new AffineTransform();
 		AffineTransform trans = new AffineTransform();
 		trans.setTransform(identity);
+		//Translate our transform by the position
 		trans.setToTranslation(pos.x, pos.y);
+		//Rotate our transform by the rotation
 		trans.rotate(Math.toRadians(rot));
+		//Draw our image using the transform
 		g.drawImage(img, trans, null);
 	}
 	
@@ -82,6 +90,7 @@ public class Entity {
 		
 	}
 	
+	//Linear interpolatin
 	double lerp(double value, double target, double weight){
 		
 		double out = (value + target*weight)/(1 + weight);
@@ -89,15 +98,17 @@ public class Entity {
 		return out;
 	}
 	
+	//Vector interpolation
 	Vector lerp(Vector value, Vector target, double c) {
 
 		Vector out;
 		
-		out = new Vector(lerp(value.x, target.x, c),lerp(value.y, target.y, c),lerp(value.z, target.z, c));
+		out = new Vector(lerp(value.x, target.x, c),lerp(value.y, target.y, c));
 		
 		return out;
 	}
 	
+	//Removes this entity from the objects list, and thus game
 	public void kill(){
 		Arcade.newObjects.remove(this);
 		if(this.enemy){
@@ -105,18 +116,16 @@ public class Entity {
 		}
 	}
 	
+	//Determines if two entities are collided with each other
 	boolean inBounds(Entity o, Entity e){
 		
 		boolean out = false;
 		
-//		if(o.pos.x < x2 && o.pos.x + o.width > x1 && o.pos.y < y2 && o.pos.y + o.height > y1){
-//			out = true;
-//		}
 		AffineTransform identity = new AffineTransform();
 		
+		//Gets area from the rotation and position of the provided entities
 		Shape rect1 = new Rectangle2D.Double(o.pos.x, o.pos.y, o.width, o.height);
 		
-
 		AffineTransform trans1 = new AffineTransform();
 		
 		trans1.setTransform(identity);
@@ -137,14 +146,17 @@ public class Entity {
 		Area a1 = new Area(rect1);
 		Area a2 = new Area(rect2);
 		
+		//Sets the area of a1 to the area that also intersects a2
 		a1.intersect(a2);
 		
+		//If a1 still has an area (a1 and a2 intersect) the return true
 		out = !a1.isEmpty();
 		
 		return out;
 		
 	}
 	
+	//Creates a list of entities collided with c
 	List<Entity> collided(Entity c){
 		List<Entity> s = new ArrayList<Entity>();
 		
@@ -157,6 +169,7 @@ public class Entity {
 		return s;
 	}
 	
+	//OUtputs true if c is collided with an entity with id of id
 	boolean isCollided(int id, Entity c){
 		boolean out = false;
 		for(Entity o : Arcade.objects){
@@ -171,6 +184,7 @@ public class Entity {
 		
 	}
 	
+	//OUuputs the closest entity to o, including or excluding everything with ids in idArray (inclusion/exclusion given by ignore)
 	Entity closest(Entity o, int[] idArray, boolean ignore){
 		
 		double x;
@@ -181,18 +195,23 @@ public class Entity {
 		
 		for(Entity i: Arcade.objects){
 			
+			//Computes distance to i
 			x = i.pos.x - o.pos.x;
 			y = i.pos.y - o.pos.y;
 			h = Math.sqrt(x*x + y*y);
 			
+			//If this distance is closer than anything else yet
 			if(h < closestDist){
 				boolean inArray = false;
+				//CHecks to see if i's id is in our array
 				for(int q : idArray){
 					if(i.id == q){
 						inArray = true;
 					}
 				}
+				//If it's in the array and we're not ignoring or it isn't and we are ignoring
 				if(inArray != ignore){
+					//Set i to our closest object
 					closestDist = h;
 					closest = i;
 				}
@@ -203,6 +222,7 @@ public class Entity {
 		
 	}
 	
+	//Finds and return our player from the objects list
 	Entity getPlayer(){
 		
 		Entity player = null;
@@ -217,6 +237,7 @@ public class Entity {
 		return player;
 	}
 	
+	//Computes the distance between to position vectors
 	double dist(Vector pos1, Vector pos2){
 		
 		double distance = 0;

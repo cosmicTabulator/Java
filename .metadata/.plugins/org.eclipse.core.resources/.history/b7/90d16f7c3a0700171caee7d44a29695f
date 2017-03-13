@@ -1,0 +1,23 @@
+package gui;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import entities.Entity;
+import main.Main;
+import main.World;
+
+public class Campaign {
+
+	public static List<Entity> objects = new ArrayList<Entity>();
+	public static List<Entity> newObjects = new ArrayList<Entity>();
+	float screenScale;
+	
+	static World world;
+	
+	public Campaign(){
+		this.screenScale = Main.screenScale;
+		world = new World();
+	}
+	
+}

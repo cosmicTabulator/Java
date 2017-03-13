@@ -4,13 +4,11 @@ public class Vector {
 
 	public double x;
 	public double y;
-	public double z;
 	
-	public Vector(double x, double y, double z){
+	public Vector(double x, double y){
 		
 		this.x = x;
 		this.y = y;
-		this.z = z;
 		
 	}
 	
@@ -18,9 +16,8 @@ public class Vector {
 		
 		double x = a.x + b.x;
 		double y = a.y + b.y;
-		double z = a.z + b.z;
 		
-		Vector c = new Vector(x, y, z);
+		Vector c = new Vector(x, y);
 		
 		return c;
 	}
@@ -29,15 +26,14 @@ public class Vector {
 		
 		double x = a.x * n;
 		double y = a.y * n;
-		double z = a.z * n;
 		
-		Vector c = new Vector(x,y,z);
+		Vector c = new Vector(x,y);
 		return c;
 	}
 	
 	public static Vector mult(Vector v, Matrix m){
 		
-		Vector out = new Vector(0,0,0);
+		Vector out = new Vector(0,0);
 		
 		out.x = v.x * m.a + v.y * m.b;
 		out.y = v.x * m.c + v.y * m.d;
@@ -51,7 +47,7 @@ public class Vector {
 		//TODO Cross Products
 		// Default returns empty vector
 		
-		Vector c = new Vector(0,0,0);
+		Vector c = new Vector(0,0);
 		
 		return c;
 	}
@@ -61,13 +57,13 @@ public class Vector {
 		//TODO Dot Products
 		//Default returns empty vector
 		
-		Vector c = new Vector(0,0,0);
+		Vector c = new Vector(0,0);
 		
 		return c;
 	}
 	
 	public void print(){
-		System.out.println(this.x + ", " + this.y + ", " + this.z);
+		System.out.println(this.x + ", " + this.y);
 	}
 	
 	public static Vector reduce(Vector a){
@@ -77,13 +73,13 @@ public class Vector {
 		Vector r;
 		if(a.x == 0 || a.y == 0){
 			if(a.x != 0){
-				r = new Vector(1,0,0);
+				r = new Vector(1,0);
 			}
 			else if (a.y != 0){
-				r = new Vector(0,1,0);
+				r = new Vector(0,1);
 			}
 			else{
-				r = new Vector(0,0,0);
+				r = new Vector(0,0);
 			}
 		}
 		else if(Math.abs(a.x) > Math.abs(a.y)){

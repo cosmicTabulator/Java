@@ -11,7 +11,7 @@ import main.Vector;
 public class Shield extends Entity{
 
 	public Shield(Vector pos) {
-		super(pos, new Vector(0,0,0));
+		super(pos, new Vector(0,0));
 		this.id = 7;
 		this.width = 16;
 		this.height = 3;

@@ -1,0 +1,188 @@
+package gui;
+
+import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+
+import main.Main;
+import main.Screen;
+
+public class Menu {
+
+	Button arcade;
+	Button settings;
+	Button quit;
+	Button credits;
+	Button selected;
+	Button campaign;
+	
+	List<Button> buttons = new ArrayList<Button>();
+	
+	int index = 0;
+	int moveTime = 0;
+	
+	public Menu(){
+		
+		//Create a bunch of menu buttons
+		
+		arcade = new Button("Play Arcade", 0, 120, 30);
+		campaign = new Button("Play Campaign", 1, 160, 30);
+		settings = new Button("Settings", 2, 200, 30);
+		quit = new Button("Quit", 3, 240, 30);
+		credits = new Button("Credits", 4, 280, 30);
+		
+		//Add the to our list
+		
+		buttons.add(arcade);
+		buttons.add(campaign);
+		buttons.add(settings);
+		buttons.add(quit);
+		buttons.add(credits);
+		
+	}
+	
+	//Graphically render our menu
+	public void menuCycle(){
+		Graphics2D g = Screen.image.createGraphics();
+		
+		g.scale(Main.screenScale, Main.screenScale);
+		
+		//Query our buttons for selection, movemenu of selection, and activation
+		action();
+		draw(g);
+
+		g.dispose();
+		Screen.pane.repaint();
+	}
+	
+	public void draw(Graphics2D g){
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, 400, 300);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
+		drawCenter("Game", 60, g);
+		
+		for (Button b : buttons){
+			b.draw(g);
+		}
+	}
+	
+	static void drawCenter(String str, int height, Color c, Graphics g){
+		
+		int width = g.getFontMetrics().stringWidth(str);
+		g.setColor(c);
+		g.drawString(str, 200 - width/2, height);
+		
+	}
+	
+	void drawCenter(String str, int height, Graphics g){
+		
+		int width = g.getFontMetrics().stringWidth(str);
+		g.setColor(Color.WHITE);
+		g.drawString(str, 200 - width/2, height);
+		
+	}
+	
+	public void action(){
+		
+		if(Screen.keys.contains(KeyEvent.VK_W) && index > 0 && Main.ticks - moveTime > 15){
+			index--;
+			moveTime = Main.ticks;
+			
+		}
+		if(Screen.keys.contains(KeyEvent.VK_S) && index < 3 && Main.ticks - moveTime > 15){
+			index++;
+			moveTime = Main.ticks;
+		}
+		
+		for (Button b : buttons){
+			if(b.index == this.index && b.state != State.DISABLED){
+				b.state = State.SELECTED;
+				selected = b;
+			} else{
+				b.state = State.UNSELECTED;
+			}
+		}
+		
+		if(Screen.keys.contains(KeyEvent.VK_ENTER)){
+			
+			if(selected == arcade){
+				Main.arcadeActive = true;
+				Main.menuActive = false;
+			}
+			if(selected == quit){
+				System.exit(0);
+			}
+			if(selected == campaign){
+				Main.campaignActive = true;
+				Main.menuActive = false;
+			}
+			
+		}
+		
+	}
+	
+	public enum State {SELECTED, UNSELECTED, PRESSED, DISABLED}
+	
+	class Button{
+		
+		String text;
+		int index;
+		int y;
+		int fontSize;
+		int width;
+		Color c;
+		
+		State state = State.UNSELECTED;
+		
+		public Button(String n, int i, int y, int h){
+			
+			this.text = n;
+			this.index = i;
+			this.y = y;
+			this.fontSize = h;
+			Font font = new Font("TimesRoman", Font.PLAIN, fontSize);
+			Canvas c = new Canvas();
+			FontMetrics metrics = c.getFontMetrics(font);
+			this.width = metrics.stringWidth(text);
+			
+		}
+		
+		public void draw(Graphics2D g){
+			
+			switch(this.state){
+			
+				case SELECTED:
+					c = Color.RED;
+					break;
+				
+				case UNSELECTED:
+					c = Color.WHITE;
+					break;
+			
+				case DISABLED:
+					c = Color.GRAY;
+					break;
+				
+				case PRESSED:
+					c = Color.ORANGE;
+					break;
+			
+			}
+			
+			g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
+			
+			Menu.drawCenter(text, y, c, g);
+			
+		}
+		
+	}
+	
+}

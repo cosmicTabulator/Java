@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="java.util.Set"/>
-<fullyQualifiedTypeName name="main.Main"/>
 <fullyQualifiedTypeName name="main.Matrix"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.awt.GraphicsConfiguration"/>
+<fullyQualifiedTypeName name="java.awt.GraphicsEnvironment"/>
+<fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+<fullyQualifiedTypeName name="main.World"/>
+<fullyQualifiedTypeName name="main.Main"/>
+<fullyQualifiedTypeName name="gui.Campaign"/>
 </qualifiedTypeNameHistroy>

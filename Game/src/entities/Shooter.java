@@ -14,7 +14,7 @@ public class Shooter extends Entity{
 	Random rand = new Random();
 	
 	public Shooter(Vector pos) {
-		super(pos, new Vector(0,0,0));
+		super(pos, new Vector(0,0));
 		this.id = 6;
 		this.enemy = true;
 		this.melee = true;
@@ -56,26 +56,12 @@ public class Shooter extends Entity{
 					Arcade.addObject(new EnemyBullet(this.pos, i*Math.PI/4, 200));
 				}
 				
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, -200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, -200, 0)));
-				
 			}
 			else{
 				
 				for(int i = 0; i < 4; i++){
 					Arcade.addObject(new EnemyBullet(this.pos, i*Math.PI/2, 200));
 				}
-				
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, 200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(200, 0, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(0, -200, 0)));
-//				Arcade.addObject(new EnemyBullet(pos, new Vector(-200, 0, 0)));
 			}
 		}
 		

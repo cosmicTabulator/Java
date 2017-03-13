@@ -18,7 +18,7 @@ public class Beamer extends Entity{
 	boolean dead = false;
 	
 	public Beamer(Vector pos) {
-		super(pos, new Vector(0,0,0));
+		super(pos, new Vector(0,0));
 		
 		this.id = 7;
 		this.enemy = true;
@@ -81,7 +81,7 @@ public class Beamer extends Entity{
 				timer = 0;
 			} else{
 				shooting = true;
-				Arcade.addObject(new Beam(new Vector((int)(pos.x + this.width/2 - 1), (int)(pos.y + this.height), 0), this));
+				Arcade.addObject(new Beam(new Vector((int)(pos.x + this.width/2 - 1), (int)(pos.y + this.height)), this));
 				timer = 0;
 			}
 		}

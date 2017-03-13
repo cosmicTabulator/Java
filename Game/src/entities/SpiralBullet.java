@@ -15,7 +15,7 @@ public class SpiralBullet extends Entity{
 	private Matrix mult;
 	
 	public SpiralBullet(Vector o, double th) {
-		super(o, new Vector(0,0,0));
+		super(o, new Vector(0,0));
 		this.id = 4;
 		this.melee = true;
 		this.width = 3;

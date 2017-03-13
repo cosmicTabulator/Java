@@ -14,7 +14,7 @@ public class Dodger extends Entity{
 	Random rand = new Random();
 	
 	public Dodger(Vector pos) {
-		super(pos, new Vector(0,0,0));
+		super(pos, new Vector(0,0));
 
 		this.enemy = true;
 		this.id = 3;

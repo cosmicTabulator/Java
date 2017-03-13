@@ -17,8 +17,10 @@ public class World {
 		g.setColor(Color.WHITE);
 		String sNum = Integer.toString(Arcade.score);
 		g.drawString(sNum, 390 - g.getFontMetrics().stringWidth(sNum), 20);
-		if(Arcade.player.shieldUse){
-			g.drawString("Shield Available!", 20, 20);
+		if(Main.arcadeActive){
+			if(Arcade.player.shieldUse){
+				g.drawString("Shield Available!", 20, 20);
+			}
 		}
 	}
 	

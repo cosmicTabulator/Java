@@ -15,7 +15,7 @@ public class EnemyBullet extends Entity{
 	Matrix mult;
 	
 	public EnemyBullet(Vector o, double th, double v) {
-		super(o, new Vector(0,0,0));
+		super(o, new Vector(0,0));
 		this.id = 4;
 		this.melee = true;
 		this.width = 3;
