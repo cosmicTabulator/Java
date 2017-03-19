@@ -53,14 +53,14 @@ public class Shooter extends Entity{
 			if(Arcade.level > 6){
 			
 				for(int i = 0; i < 8; i++){
-					Arcade.addObject(new EnemyBullet(this.pos, i*Math.PI/4, 200));
+					env.addObject(new EnemyBullet(this.pos, i*Math.PI/4, 200));
 				}
 				
 			}
 			else{
 				
 				for(int i = 0; i < 4; i++){
-					Arcade.addObject(new EnemyBullet(this.pos, i*Math.PI/2, 200));
+					env.addObject(new EnemyBullet(this.pos, i*Math.PI/2, 200));
 				}
 			}
 		}

@@ -51,7 +51,7 @@ public class Shield extends Entity{
 			}
 		}
 		
-		if(!Arcade.objects.contains(Arcade.player)){
+		if(!env.objects.contains(Arcade.player)){
 			this.kill();
 		}
 	}

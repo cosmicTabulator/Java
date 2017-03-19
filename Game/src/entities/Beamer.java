@@ -81,7 +81,7 @@ public class Beamer extends Entity{
 				timer = 0;
 			} else{
 				shooting = true;
-				Arcade.addObject(new Beam(new Vector((int)(pos.x + this.width/2 - 1), (int)(pos.y + this.height)), this));
+				env.addObject(new Beam(new Vector((int)(pos.x + this.width/2 - 1), (int)(pos.y + this.height)), this));
 				timer = 0;
 			}
 		}

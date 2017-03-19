@@ -15,6 +15,8 @@ import main.Vector;
 
 public class Boss1 extends Entity{
 
+	Vector playerPos;
+	
 	private int lastSpawn;
 	private int fireRate = 5;
 	private double theta = Math.PI/4;
@@ -55,15 +57,31 @@ public class Boss1 extends Entity{
 		
 		timer++;
 		
-		if(hp < 0){
+		if(hp < 0 || getPlayer() == null){
 			kill();
 		}
 		
 		if(ticks - lastSpawn > fireRate){
 		
-			theta = rand.nextDouble() * Math.PI * 2;
+			//theta = rand.nextDouble() * Math.PI * 2;
 		
-			Campaign.addObject(new PhaseBullet(pos, theta));
+			//If there's still a player
+			if(getPlayer() != null){
+				playerPos = getPlayer().pos;
+				//Get a vector cossosponding to the difference in position between this entity and the player
+				Vector dir = Vector.add(Vector.mult(this.pos, -1), playerPos);
+
+				theta = Math.atan2(-dir.x,dir.y);
+				
+			}
+			
+			if(rand.nextBoolean()){
+				theta = theta + (rand.nextDouble() * (Math.PI/8));
+			} else {
+				theta = theta - (rand.nextDouble() * (Math.PI/8));
+			}
+			
+			env.addObject(new EnemyBullet(pos, theta, 200));
 				
 			lastSpawn = ticks;
 		}

@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import gui.Arcade;
+import gui.Environment;
 import main.Main;
 import main.Screen;
 import main.Vector;
@@ -26,6 +27,7 @@ public class Entity {
 
 	Vector pos;
 	Vector vel;
+	public Environment env = null;
 	int width = 10;
 	int height = 10;
 	int ticks = 0;
@@ -90,7 +92,7 @@ public class Entity {
 		
 	}
 	
-	//Linear interpolatin
+	//Linear interpolation
 	double lerp(double value, double target, double weight){
 		
 		double out = (value + target*weight)/(1 + weight);
@@ -110,9 +112,9 @@ public class Entity {
 	
 	//Removes this entity from the objects list, and thus game
 	public void kill(){
-		Arcade.newObjects.remove(this);
+		env.newObjects.remove(this);
 		if(this.enemy){
-			Arcade.killCount++;
+			env.killCount++;
 		}
 	}
 	
@@ -160,7 +162,7 @@ public class Entity {
 	List<Entity> collided(Entity c){
 		List<Entity> s = new ArrayList<Entity>();
 		
-		for (Entity o : Arcade.objects){
+		for (Entity o : env.objects){
 			if(inBounds(o, c)){
 				s.add(o);
 			}
@@ -172,7 +174,7 @@ public class Entity {
 	//OUtputs true if c is collided with an entity with id of id
 	boolean isCollided(int id, Entity c){
 		boolean out = false;
-		for(Entity o : Arcade.objects){
+		for(Entity o : env.objects){
 			if(inBounds(o, c)){
 				if(o.id == id){
 					out = true;
@@ -193,7 +195,7 @@ public class Entity {
 		double closestDist = Double.MAX_VALUE;
 		Entity closest = null;
 		
-		for(Entity i: Arcade.objects){
+		for(Entity i: env.objects){
 			
 			//Computes distance to i
 			x = i.pos.x - o.pos.x;
@@ -227,7 +229,7 @@ public class Entity {
 		
 		Entity player = null;
 		
-		for(Entity o : Arcade.objects){
+		for(Entity o : env.objects){
 			if(o.id == 1){
 				player = o;
 			}

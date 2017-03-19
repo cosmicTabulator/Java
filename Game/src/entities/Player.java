@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import gui.Arcade;
 import gui.Campaign;
 import main.Main;
 import main.Screen;
@@ -63,28 +62,22 @@ public class Player extends Entity{
 		
 		//Map E to spawn the boss, only during campaign (this is for testing purposes)
 		if(s.contains(KeyEvent.VK_E) && ticks - lastSpawnEnemy > 20 && Main.campaignActive){
-			Campaign.addObject(new Boss1(new Vector(pos.x, pos.y - 50)));
+			env.addObject(new Boss1(new Vector(pos.x, pos.y - 50)));
 			lastSpawnEnemy = ticks;
 		}
 		
 		//Map F to activate the shield if the player has one pending
 		if(s.contains(KeyEvent.VK_F) && !shield && shieldUse){
 			
-			Arcade.addObject(new Shield(new Vector(pos.x, pos.y)));
+			env.addObject(new Shield(new Vector(pos.x, pos.y)));
 			shield = true;
 			shieldUse = false;
 			
 		}
 		
 		//Map Space to fire bullets (During Campaign)
-		if(s.contains(KeyEvent.VK_SPACE) && ticks - lastSpawn > fireRate && Main.campaignActive){
-			Campaign.addObject(new Bullet (new Vector(pos.x + (width/2), pos.y), new Vector(0, -400)));
-			lastSpawn = ticks;
-		}
-		
-		//Map Space to fire bullets (During Arcade)
-		if(s.contains(KeyEvent.VK_SPACE) && ticks - lastSpawn > fireRate && Main.arcadeActive){
-			Arcade.addObject(new Bullet (new Vector(pos.x + (width/2), pos.y), new Vector(0, -400)));
+		if(s.contains(KeyEvent.VK_SPACE) && ticks - lastSpawn > fireRate){
+			env.addObject(new Bullet (new Vector(pos.x + (width/2), pos.y), new Vector(0, -400)));
 			lastSpawn = ticks;
 		}
 		

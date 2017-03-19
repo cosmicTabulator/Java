@@ -87,14 +87,14 @@ public class Main {
 
 		if(arcadeActive){
 			//If the arcade is currently active, render it
-			arcade.arcadeCycle();
+			arcade.cycle(ticks);
 		} else if(menuActive){
 			//If the menu is currently active, render that
 			menu.menuCycle();
 		} else if (campaignActive){
 			//if the campaign is currently active, render it
 			//Note, Campaign is currently very unfinished, you can ignore it
-			campaign.campaignCycle();
+			campaign.cycle(ticks);
 		}
 	}
 

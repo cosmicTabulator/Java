@@ -5,9 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.Set;
 
 import org.json.JSONObject;
 
@@ -22,41 +20,24 @@ import main.Leaderboards;
 import main.Main;
 import main.Screen;
 import main.Vector;
-import main.World;
 
-public class Arcade {
-
-	public static List<Entity> objects = new ArrayList<Entity>();
-	public static List<Entity> newObjects = new ArrayList<Entity>();
+public class Arcade extends Environment{
 	
 	public static int score = 0;
 	public static int highScore = 0;
 	boolean scoreSaved = false;
 	boolean highscored = false;
 	float screenScale;
-	int timer;
 	int spawnTotal;
 	int spawnTime;
 	int spawn;
-	public static int killCount;
-	public static int level;
+	public static int level; 
 	boolean spawned = false;
 	boolean levelSplash = true;
-	boolean doneInit = false;
-	
-	static World world;
-	FileHandler fh;
-	Leaderboards lb;
-	
-	Random rand = new Random();
-	
-	public static Player player;
 	
 	public Arcade(){
 		
-		//Get the current window scaling
-		this.screenScale = Main.screenScale;
-		world = new World();
+		super();
 		
 		//create a new file reader to read all saved scores
 		fh = new FileHandler("highscore.json");
@@ -72,32 +53,8 @@ public class Arcade {
 		
 	}
 	
-	//Called each tick to run the arcade environment
-	public void arcadeCycle(){
-		//Increment our timer by one
-		timer++;
-		//If we haven't initialized our environment, do so
-		if(!doneInit){
-			init();
-		}
-		//If Q is being pressed, return to the menu and kill the session;
-		if(Screen.keys.contains(KeyEvent.VK_Q)){
-			Main.arcadeActive = false;
-			Main.menuActive = true;
-			killSession();
-			return;
-		}
-		//Reset our list of objects to be added to the environment next tick
-		newObjects.clear();
-		for(Entity o : objects){
-			newObjects.add(o);
-		}
-		//Get a graphics object from our window to render to
-		Graphics2D g = Screen.image.createGraphics();
-		//Scale everything we draw by our scale factor
-		g.scale(screenScale, screenScale);
-		//Draw our background
-		world.draw(g);
+	@Override
+	protected void draw(Graphics2D g){
 		//If the player has been killed (not in the objects list) save the score, Draw a death screen, and request a re-spawn
 		if(!objects.contains(player)){
 			//If our score hasn't been saved
@@ -124,14 +81,6 @@ public class Arcade {
 				scoreSaved = false;
 			}
 		}
-		//Run our arcade events (Spawning enemies)
-		eventSequence();
-		//Process entity actions, get their current positions, and render them with our graphics object
-		for(Entity o : objects){
-			o.onTick(Main.ticks);
-			o.getPos();
-			o.draw(g);
-		}
 		//If we've advanced to a new level
 		if(levelSplash){
 			//Draw a New level banner
@@ -139,39 +88,11 @@ public class Arcade {
 			g.setFont(new Font("TimesRoman", Font.PLAIN, 50));
 			world.drawCenter("Level " + level, 150, g);
 		}
-		//Apply our changes to the graphics object and get rid of it
-		g.dispose();
-		//Repaint our window
-		Screen.pane.repaint();
-		//Empty our objects list
-		objects.clear();
-		//Fill it with the new objects added this ticks and ones which we're removed
-		for(Entity o : newObjects){
-			objects.add(o);
-		}
-	}
-	
-	//Adds an entity to our newObjects list
-	public static void addObject(Entity o){
-		int id = 1;
-		boolean idTaken = true;
-		//Increment the entity's internal id until we find one that's not taken
-		while(idTaken){
-			idTaken = false;
-			for(Entity q : newObjects){
-				if(q.id == id && !idTaken){
-					idTaken = true;
-					id++;
-				}
-			}
-		}
-		o.intId = id;
-		//add it to our list
-		newObjects.add(o);
 	}
 	
 	//This controls enemy spawning
-	private void eventSequence(){
+	@Override
+	protected void eventSequence() {
 		
 		//If our player is still alive
 		if(objects.contains(player)){
@@ -245,9 +166,8 @@ public class Arcade {
 					addObject(new Seeker(new Vector(rand.nextInt(260) + 60, 0)));
 				}
 			}
-			
 			//If the player's killed everything we've spawned
-			if(killCount == spawn){
+			if(killCount >= spawn){
 				//Remove any enemy bullets
 				for (Entity o: objects){
 					if(o.id == 4 || o.enemy){
@@ -266,8 +186,19 @@ public class Arcade {
 		}
 	}
 	
+	@Override
+	protected void checkActionMap(Set<Integer> s){
+		//If Q is being pressed, return to the menu and kill the session;
+		if(Screen.keys.contains(KeyEvent.VK_Q)){
+			Main.arcadeActive = false;
+			Main.menuActive = true;
+			exit();
+			return;
+		}
+	}
+	
 	//Draw a death screen
-	void drawKillScreen(Graphics g){
+	private void drawKillScreen(Graphics g){
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 30));
 		//If we reached a highscore, say so
@@ -311,20 +242,20 @@ public class Arcade {
 	}
 	
 	//Initialize our environment
-	private void init(){
+	@Override
+	protected void init(){
 		//Get the all time high score
 		highScore = lb.getHighScore();
 		//Spawn in the player
 		player = new Player(new Vector(200, 200), new Vector(0,0));
 		objects.add(player);
+		player.env = this;
 		doneInit = true;
 	}
 	
 	//Exit the session
-	private void killSession(){
-		//Write our current score
-		lb.addScore(score);
-		fh.write(lb.get());
+	@Override
+	protected void exit(){
 		//Clear our objects list
 		objects.clear();
 		//Reset the score
