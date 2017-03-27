@@ -64,4 +64,34 @@ public class Generator {
 		return v;
 	}
 	
+	public List<Pair> layerLine(int height, int width, float varience){
+		
+		List<Pair> heights = new ArrayList<Pair>();
+		
+		heights.add(new Pair(0, height));
+		
+		int currentHeight = height;
+		
+		for(int x = 1; x < width; x++){
+			
+			float r = rand.nextFloat();
+			
+			if(r < varience){
+				
+				if(rand.nextBoolean()){
+					currentHeight++;
+				} else{
+					currentHeight--;
+				}
+				
+			}
+			
+			heights.add(new Pair(x, currentHeight));
+			
+		}
+		
+		return heights;
+		
+	}
+	
 }

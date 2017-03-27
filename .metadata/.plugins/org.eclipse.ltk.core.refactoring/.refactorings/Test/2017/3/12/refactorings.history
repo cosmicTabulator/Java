@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Pair.java&apos; to &apos;Terrus/src/main&apos;&#x0A;- Original project: &apos;Test&apos;&#x0A;- Destination element: &apos;Terrus/src/main&apos;&#x0A;- Original element: &apos;Pair.java&apos;" description="Copy compilation unit" destination="=Terrus/src&lt;main" element1="/src&lt;{Pair.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1489969567559" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,22 @@
+package graphics;
+
+import java.awt.Color;
+
+public class Cell {
+
+	Color c;
+	int x;
+	int y;
+	String tag;
+	
+	public Cell(){
+		
+	}
+	
+	public void setColor(Color color){
+		
+		this.c = color;
+		
+	}
+	
+}

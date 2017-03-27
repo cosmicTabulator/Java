@@ -41,6 +41,7 @@ public class Screen{
 		//Create a dynamic image and attach it to the window
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		pane = new JLabel(new ImageIcon(image));
+		pane.setFocusable(false);
 		
 		image = toCompatibleImage(image);
 		
@@ -63,6 +64,7 @@ public class Screen{
 				
 				//When a key is pressed, add it to our set of pressed keys
 				int keyCode = e.getKeyCode();
+				System.out.println(keyCode);
 				if(!keys.contains(keyCode)){
 					keys.add(keyCode);
 				}
@@ -83,6 +85,7 @@ public class Screen{
 		
 		//Finalizes our window
 		frame.addKeyListener(keylistener);
+//		pane.addKeyListener(keylistener);
 		frame.setContentPane(pane);
 		frame.pack();
 		frame.setVisible(true);

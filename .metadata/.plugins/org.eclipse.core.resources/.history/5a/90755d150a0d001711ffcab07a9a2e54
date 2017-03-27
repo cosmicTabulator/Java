@@ -1,0 +1,27 @@
+package main;
+
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
+public class World {
+
+	Set<Tile> fullTiles = new HashSet<Tile>();
+	HashMap<Integer,Tile> tiles = new HashMap<Integer,Tile>();
+	List<Tile> activeTiles = new ArrayList<Tile>();
+
+	
+	public World(){
+		
+	}
+	
+	public void addTile(Tile t){
+		
+		Pair key = new Pair((int)t.pos.x, (int)t.pos.y);
+		
+		tiles.put(key.hashCode(), t);
+	}
+	
+}

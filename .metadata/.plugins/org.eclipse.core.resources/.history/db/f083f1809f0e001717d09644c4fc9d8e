@@ -1,0 +1,26 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cell {
+
+	boolean status;
+	
+	Vector pos;
+	
+	public Cell(int x, int y, boolean state){
+		pos.x = x;
+		pos.y = y;
+		this.status = state;
+	}
+	
+	public List<Cell> getNeighbors(){
+		
+		List<Cell> neighbors = new ArrayList<Cell>();
+		
+		Vector n = new Vector(pos.x, pos.y -1);
+		
+		return neighbors;
+		
+	}
+	
+}

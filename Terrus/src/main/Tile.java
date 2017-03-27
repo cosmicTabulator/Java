@@ -2,11 +2,15 @@ package main;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tile {
 
 	int width;
 	int height;
+	float temp;
+	float tempBuffer;
 	Vector pos;
 	Vector screenPos;
 	Color color;
@@ -36,6 +40,44 @@ public class Tile {
 		}
 		
 		return out;
+	}
+	
+	private List<Tile> getNeighbors(){
+		
+		List<Tile> neighbors = new ArrayList<Tile>();
+		
+		Pair coordN = new Pair((int)this.pos.x,(int)this.pos.y - 1);
+		Pair coordS = new Pair((int)this.pos.x,(int)this.pos.y + 1);
+		Pair coordE = new Pair((int)this.pos.x + 1,(int)this.pos.y);
+		Pair coordW = new Pair((int)this.pos.x - 1,(int)this.pos.y);
+		
+		neighbors.add(Main.world.tiles.get(coordN.hashCode()));
+		neighbors.add(Main.world.tiles.get(coordS.hashCode()));
+		neighbors.add(Main.world.tiles.get(coordE.hashCode()));
+		neighbors.add(Main.world.tiles.get(coordW.hashCode()));
+		
+		return neighbors;
+		
+	}
+	
+	public Tile neighbor(int x, int y){
+		
+		Pair coord = new Pair((int)this.pos.x - x,(int)this.pos.y - y);
+		
+		return Main.world.tiles.get(coord.hashCode());
+	}
+	
+	public void simulate(){
+
+		//Heat Transfer Later
+		
+	}
+	
+	public void updateReferences(Vector lastPos){
+		
+		Main.world.tiles.remove(lastPos.hashCode());
+		Main.world.tiles.put(this.pos.hashCode(), this);
+		
 	}
 	
 }

@@ -1,0 +1,38 @@
+package graphics;
+
+import java.awt.Color;
+
+import main.Tuple;
+
+public class Cell {
+
+	Color c;
+	Tuple pos;
+	String tag;
+	
+	public Cell(Tuple pos, Color defaultColor){
+		
+		this.pos = pos;
+		c = defaultColor;
+		
+	}
+	
+	public void setColor(Color color){
+		
+		this.c = color;
+		
+	}
+	
+	public void setTag(String s){
+		
+		this.tag = s;
+		
+	}
+	
+	public String getTag(){
+		
+		return tag;
+		
+	}
+	
+}

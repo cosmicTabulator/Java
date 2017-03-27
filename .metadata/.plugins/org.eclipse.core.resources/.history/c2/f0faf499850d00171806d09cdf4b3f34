@@ -1,0 +1,13 @@
+package main;
+
+public class Array<T> {
+
+	T var;
+	
+	public Array<T type>(){
+		
+		
+		
+	}
+	
+}

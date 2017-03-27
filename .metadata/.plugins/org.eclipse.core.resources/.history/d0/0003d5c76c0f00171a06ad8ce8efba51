@@ -1,0 +1,17 @@
+package graphics;
+
+public class Console {
+
+	int height;
+	int width;
+	
+	public Console(int h, int w){
+		
+		this.height = h;
+		this.width = w;
+		
+		
+		
+	}
+	
+}

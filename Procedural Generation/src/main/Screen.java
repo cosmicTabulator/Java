@@ -13,6 +13,7 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JSlider;
 
 public class Screen{
 
@@ -22,6 +23,7 @@ public class Screen{
 	public JFrame frame;
 	public JLabel pane;
 	public BufferedImage image;
+	public JSlider slider;
 	public static Set<Integer> keys = new HashSet<Integer>();
 	
 	public Screen(int width, int height){
@@ -39,7 +41,7 @@ public class Screen{
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		
 		//Create a dynamic image and attach it to the window
-		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		image = new BufferedImage(width, height-50, BufferedImage.TYPE_INT_RGB);
 		pane = new JLabel(new ImageIcon(image));
 		
 		image = toCompatibleImage(image);

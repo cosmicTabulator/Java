@@ -1,0 +1,9 @@
+package main;
+
+public class Array<T>[N] {
+
+	public Array<T>(){
+		
+	}
+	
+}

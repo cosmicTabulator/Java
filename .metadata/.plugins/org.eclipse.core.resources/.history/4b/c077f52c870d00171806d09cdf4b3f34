@@ -1,0 +1,26 @@
+package main;
+
+import java.util.ArrayList;
+
+public class Array<T> {
+
+	ArrayList<ArrayList<T>> superList = new ArrayList<ArrayList<T>>();
+	
+	public T get(int x, int y){
+		
+		T out = superList.get(x).get(y);
+		
+		return out;
+		
+	}
+	
+	public void put(int x, int y, T val){
+		
+		if(superList.get(x) == null){
+			superList.add(x, new ArrayList<T>());
+		}
+		
+		superList.get(x).add(y, val);
+		
+	}
+}
