@@ -15,9 +15,11 @@ import graphics.Display;
 
 public class Console {
 
+	
+	boolean squareCells = true;
 	Display display;
 	
-	Tuple cursorPos;
+	Vector cursorPos;
 	
 	int width;
 	int height;
@@ -54,6 +56,10 @@ public class Console {
 		cellHeight = fm.getHeight() + 2 * buffer;
 		cellWidth = fm.charWidth('@') + 2 * buffer;
 		
+		if(squareCells){
+			cellWidth = cellHeight;
+		}
+		
 		descender = fm.getMaxDescent();
 		System.out.println(descender);
 		
@@ -80,7 +86,7 @@ public class Console {
 		for(int x = 0; x < width; x++){
 			for(int y = 0; y < height; y++){
 				
-				Tuple pos = new Tuple(x,y);
+				Vector pos = new Vector(x,y);
 				Cell cell = new Cell(pos, bgColor);
 				cellFeild.add(cell);
 				cellMap.put(pos.hashCode(), cell);
@@ -90,16 +96,16 @@ public class Console {
 		
 	}
 	
-	public void setCellColor(Color c, Tuple pos){
+	public void setCellColor(Color c, Vector pos){
 		Cell cell = cellMap.get(pos.hashCode());
 		cell.setColor(c);
 	}
 	
-	public void fillRect(Color c, Tuple pos1, Tuple pos2){
-		Tuple fillPos;
+	public void fillRect(Color c, Vector pos1, Vector pos2){
+		Vector fillPos;
 		for(int x = pos1.a; x <= pos2.a; x++){
 			for(int y = pos1.b; y <= pos2.b; y++){
-				fillPos = new Tuple(x, y);
+				fillPos = new Vector(x, y);
 				setCellColor(c, fillPos);
 			}
 		}
@@ -108,19 +114,19 @@ public class Console {
 	
 	public void setTextColor(Color c){this.textColor = c;}
 	
-	public void setTextColor(Color c, Tuple pos){
+	public void setTextColor(Color c, Vector pos){
 		Cell cell = cellMap.get(pos.hashCode());
 		cell.setTextColor(c);
 	}
 	
-	public void putChar(char c, Tuple pos){
+	public void putChar(char c, Vector pos){
 		Cell cell = cellMap.get(pos.hashCode());
 		cell.setChar(c);
 		cell.blank = false;
 		
 	}
 	
-	public void putChar(char c, Color color, Tuple pos){
+	public void putChar(char c, Color color, Vector pos){
 		Cell cell = cellMap.get(pos.hashCode());
 		cell.setChar(c);
 		cell.setTextColor(color);
@@ -128,7 +134,7 @@ public class Console {
 		
 	}
 	
-	public void putChar(int i, Tuple pos){
+	public void putChar(int i, Vector pos){
 		Cell cell = cellMap.get(pos.hashCode());
 		char c = getAscii(i);
 		cell.setChar(c);
@@ -136,7 +142,7 @@ public class Console {
 		
 	}
 	
-	public void putChar(int i, Color color, Tuple pos){
+	public void putChar(int i, Color color, Vector pos){
 		Cell cell = cellMap.get(pos.hashCode());
 		char c = getAscii(i);
 		cell.setChar(c);
@@ -145,13 +151,13 @@ public class Console {
 		
 	}
 	
-	public boolean putString(String string, Tuple pos){
+	public boolean putString(String string, Vector pos){
 		
 		int xMarker = pos.a;
 		int yMarker = pos.b;
 		
 		for(char c : string.toCharArray()){
-			putChar(c, new Tuple(xMarker, yMarker));
+			putChar(c, new Vector(xMarker, yMarker));
 			xMarker++;
 			if(xMarker > width){
 				xMarker = 0;
@@ -166,13 +172,13 @@ public class Console {
 		
 	}
 	
-	public boolean putString(String string, Color color, Tuple pos){
+	public boolean putString(String string, Color color, Vector pos){
 		
 		int xMarker = pos.a;
 		int yMarker = pos.b;
 		
 		for(char c : string.toCharArray()){
-			putChar(c, color, new Tuple(xMarker, yMarker));
+			putChar(c, color, new Vector(xMarker, yMarker));
 			xMarker++;
 			if(xMarker > width){
 				xMarker = 0;
@@ -187,8 +193,8 @@ public class Console {
 		
 	}
 	
-	public void clearCell(Tuple pos){
-		pos = new Tuple(pos.a, pos.b +1 -descender);
+	public void clearCell(Vector pos){
+		pos = new Vector(pos.a, pos.b +1 -descender);
 		Cell cell = cellMap.get(pos.hashCode());
 		cell.blank = true;
 	}
@@ -261,12 +267,13 @@ public class Console {
 		
 		for(int i = 0; i < 255; i++){
 			charList[i] = getAscii(i);
+			printChar(i);
 		}
 		
 		int xMark = 0;
 		int yMark = 0;
 		for(char c : charList){
-			putChar(c, color, new Tuple(xMark,yMark));
+			putChar(c, color, new Vector(xMark,yMark));
 			xMark++;
 			if(xMark >= width){
 				yMark++;
@@ -284,11 +291,13 @@ public class Console {
 	
 	public static void main(String[] args){
 		
-		Console console = new Console(60, 40, 12, Color.WHITE, "Helvetica");
+		Console console = new Console(60, 40, 12, Color.WHITE, Font.SANS_SERIF);
 		
 		console.printAsciiSet(Color.BLACK);
 		
-		console.putChar('a', new Tuple(59, 39));
+		console.putChar('a', new Vector(59, 39));
+		
+		console.setCellColor(Color.RED, new Vector(0,0));
 		
 		console.draw();
 

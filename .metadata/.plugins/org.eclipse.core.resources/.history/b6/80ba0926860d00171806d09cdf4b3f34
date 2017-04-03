@@ -1,8 +1,0 @@
-package main;
-
-public class Array<T,U,V> {
-
-	List<List<String>> superList = new List<List<String>>();
-	
-	
-}

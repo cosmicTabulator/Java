@@ -1,0 +1,52 @@
+import java.util.HashMap;
+import java.util.Random;
+
+public class Noise2D {
+
+	Random rand;
+	int size;
+	HashMap<Integer,Vector> map = new HashMap<Integer,Vector>();
+	
+	public Noise2D(long seed){
+		
+		rand = new Random(seed);
+		
+		for(int x = 0; x < size +1; x++){
+			for(int y = 0; y < size +1; y++){
+				Vector v = new Vector(x,y);
+				double theta = rand.nextDouble() * Math.PI * 2;
+				double xVal = Math.sin(theta);
+				double yVal = Math.cos(theta);
+				Vector g = new Vector(xVal, yVal);
+				map.put(v.hashCode(), g);
+				
+			}
+		}
+		
+	}
+	
+	public double getVal(double x, double y){
+		
+		double val;
+		
+		double xF = Math.floor(x);
+		double yF = Math.floor(y);
+		
+		Vector pos = new Vector(x - xF,y - yF);
+		
+		Vector nw = map.get(new Vector(xF, yF).hashCode());
+		Vector ne = map.get(new Vector(xF+1, yF).hashCode());
+		Vector sw = map.get(new Vector(xF, yF+1).hashCode());
+		Vector se = map.get(new Vector(xF+1, yF+1).hashCode());
+		
+		Vector nwP = pos;
+		Vector neP = new Vector(pos.x, pos.y -1);
+		Vector swP = new Vector(pos.x -1, pos.y);
+		Vector seP = new Vector(pos.x -1, pos.y -1);
+		
+		double val1 = Vector.dot(nw, nwP);
+		
+		return val;
+	}
+	
+}

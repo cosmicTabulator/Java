@@ -1,0 +1,23 @@
+
+public class KeyTest {
+
+	public KeyTest(){
+		
+		Screen screen = new Screen(80,80);
+		
+		
+		
+	}
+	
+	public class moveAction(int dir){
+		
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		new KeyTest();
+		
+	}
+
+}

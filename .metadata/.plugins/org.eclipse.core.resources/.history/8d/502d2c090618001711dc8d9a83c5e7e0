@@ -1,0 +1,102 @@
+
+
+public class Vector {
+
+	public double x;
+	public double y;
+	
+	public Vector(double x, double y){
+		
+		this.x = x;
+		this.y = y;
+		
+	}
+	
+	public static Vector add(Vector a, Vector b){
+		
+		double x = a.x + b.x;
+		double y = a.y + b.y;
+		
+		Vector c = new Vector(x, y);
+		
+		return c;
+	}
+	
+	public static Vector mult(Vector a, double n){
+		
+		double x = a.x * n;
+		double y = a.y * n;
+		
+		Vector c = new Vector(x,y);
+		return c;
+	}
+	
+	public static Vector mult(Vector v, Matrix m){
+		
+		Vector out = new Vector(0,0);
+		
+		out.x = v.x * m.a + v.y * m.b;
+		out.y = v.x * m.c + v.y * m.d;
+		
+		return out;
+		
+	}
+	
+	public Vector cross(Vector a, Vector b){
+		
+		//TODO Cross Products
+		// Default returns empty vector
+		
+		Vector c = new Vector(0,0);
+		
+		return c;
+	}
+	
+	public static double dot(Vector a, Vector b){
+		
+		double xOut = a.x * b.y;
+		double yOut = a.y * b.y;
+		
+		double c = xOut + yOut;
+		
+		return c;
+	}
+	
+	public void print(){
+		System.out.println(this.x + ", " + this.y);
+	}
+	
+	public long hashCode(){
+		
+		long hash = (this.x + "," + this.y).hashCode();
+		
+		
+		return hash;
+	}
+	
+	public static Vector reduce(Vector a){
+		
+		//WARNING! DOES NOT WORK WITH Z
+		
+		Vector r;
+		if(a.x == 0 || a.y == 0){
+			if(a.x != 0){
+				r = new Vector(1,0);
+			}
+			else if (a.y != 0){
+				r = new Vector(0,1);
+			}
+			else{
+				r = new Vector(0,0);
+			}
+		}
+		else if(Math.abs(a.x) > Math.abs(a.y)){
+			r = Vector.mult(a, Math.abs(1/a.x));
+		}
+		else{
+			r = Vector.mult(a, Math.abs(1/a.y));
+		}
+		
+		return r;
+	}
+}

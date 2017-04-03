@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;main.Tuple&apos; to &apos;Vector&apos;&#x0A;- Original project: &apos;ASCII Console&apos;&#x0A;- Original element: &apos;main.Tuple&apos;&#x0A;- Renamed element: &apos;main.Vector&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Tuple&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;main{Tuple.java[Tuple" matchStrategy="1" name="Vector" qualified="false" references="true" similarDeclarations="false" stamp="1491002749011" textual="false" version="1.0"/>
+</session>

@@ -1,9 +1,0 @@
-package main;
-
-public class Array<T> {
-
-	public Array<T>(){
-		
-	}
-	
-}

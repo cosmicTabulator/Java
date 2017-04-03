@@ -2,7 +2,7 @@ package graphics;
 
 import java.awt.Color;
 
-import main.Tuple;
+import main.Vector;
 
 public class Cell {
 
@@ -10,10 +10,10 @@ public class Cell {
 	public boolean blank;
 	Color c;
 	Color textC;
-	final Tuple pos;
+	final Vector pos;
 	String tag;
 	
-	public Cell(Tuple pos, Color defaultColor){
+	public Cell(Vector pos, Color defaultColor){
 		
 		this.pos = pos;
 		this.blank = true;
@@ -21,7 +21,7 @@ public class Cell {
 		
 	}
 	
-	public Tuple getPos(){return this.pos;}
+	public Vector getPos(){return this.pos;}
 	
 	public int getX(){return this.pos.a;}
 	
