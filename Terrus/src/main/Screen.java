@@ -64,7 +64,6 @@ public class Screen{
 				
 				//When a key is pressed, add it to our set of pressed keys
 				int keyCode = e.getKeyCode();
-				System.out.println(keyCode);
 				if(!keys.contains(keyCode)){
 					keys.add(keyCode);
 				}

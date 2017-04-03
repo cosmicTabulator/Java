@@ -27,7 +27,7 @@ public class Main {
 		
 		if(gen2d == true){
 		//DO NOT PUT DEPTH ABOVE 9
-		gen = new Generator(0.5f, 9, new Point(0,0), new Point(0,0));
+		gen = new Generator(0.5f, 8, new Point(0,0), new Point(0,0));
 		
 		Point3[][] list = gen.generate2d(new Point3(0,0,0.5), new Point3(1,0,0.5), new Point3(0,1,0.5), new Point3(1,1,0.5));
 		
@@ -71,6 +71,9 @@ public class Main {
 				
 				}
 			}
+		
+		g.dispose();
+		screen.pane.repaint();
 	}
 		
 //		float threshold;

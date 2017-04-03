@@ -13,6 +13,7 @@ import java.util.Set;
 public class Main {
 	
 	long lastTick = 0;
+	public static long ticks = 0;
 	public static boolean running = true;
 	
 	Camera c;
@@ -81,7 +82,7 @@ public class Main {
 //		screen.pane.repaint();
 		
 		c = new Camera(screen);
-		p = new Player(new Vector(0,0));
+		p = new Player(new Vector(0,150));
 		world.addTile(p);
 		
 		loop();
@@ -92,6 +93,7 @@ public class Main {
 		while(running){
 			
 			if(System.currentTimeMillis() - lastTick >= 20){
+				ticks++;
 				lastTick = System.currentTimeMillis();
 				
 //				world.activeTilesBuffer.clear();
@@ -116,6 +118,12 @@ public class Main {
 				for(int i : c.getCoords()){
 					c.draw(world.tiles.get(i), g);
 				}
+				for(Tile t : world.tiles.values()){
+					if(t == p){
+						System.out.println("In Tiles");
+						p.draw(g, Vector.add(p.pos, Vector.mult(c.pos, -10)));
+					}
+				}
 				
 //				for(Tile t : world.activeTiles){
 //					t.simulate();
@@ -131,7 +139,7 @@ public class Main {
 				
 //				System.out.println(Screen.keys.toString());
 				
-				//p.pos.print();
+				p.pos.print();
 				
 				
 				

@@ -96,7 +96,7 @@ public class Main {
 		for(int x = 0; x < width/cellSize; x++){
 			for(int y = 0; y < height/cellSize; y++){
 				boolean value;
-				if(rand.nextInt(10) > 5){
+				if(rand.nextInt(10) > 4){
 					value = true;
 				} else{
 					value = false;
@@ -149,16 +149,16 @@ public class Main {
 			
 			boolean outState = false;
 			
-			if(c.status && alive > 3){
+			if(c.status && alive > 4){
 				outState = true;
 			}
-			if(c.status && alive < 4){
+			if(c.status && alive < 5){
 				outState = false;
 			}
-			if(!c.status && alive > 5){
+			if(!c.status && alive > 4){
 				outState = true;
 			}
-			if(!c.status && alive < 6){
+			if(!c.status && alive < 5){
 				outState = false;
 			}
 			
