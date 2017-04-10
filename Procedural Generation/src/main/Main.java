@@ -52,23 +52,39 @@ public class Main {
 		
 		Graphics2D g = screen.image.createGraphics();
 		
+		boolean covered[][] = new boolean[list.length][101];
+		
 		for(int x = 0; x < list.length; x++){
 			for(int y = 0; y < list.length; y++){
+				
+					int val = (int) (((list[x][y].z - lowest)/range)*100);				
+					System.out.println(val);
+//					int val = (int) Math.round(list[x][y].z*100);
 					
-					float val = (float) ((list[x][y].z - lowest)/range);
-					
-					if(val < 0){
-						val = 0;
-					} else if(val > 1){
-						val = 1;
+					if(!covered[x][val]){
+						
+						Color c = Color.getHSBColor(0, 0, 1 - ((float)y/(float)list.length));
+						
+						g.setColor(c);
+						
+						g.fillRect(x*(800/gen.l), val*(800/gen.l), 800/gen.l, 800/gen.l);
+						
+						covered[x][val] = true;
+						
 					}
-				
-					Color c = Color.getHSBColor(0, 0, val);
-				
-					g.setColor(c);
 					
-					g.fillRect(x*(800/gen.l), y*(800/gen.l), 800/gen.l, 800/gen.l);
-				
+//					if(val < 0){
+//						val = 0;
+//					} else if(val > 1){
+//						val = 1;
+//					}
+//				
+//					Color c = Color.getHSBColor(0, 0, val);
+//				
+//					g.setColor(c);
+//					
+//					g.fillRect(x*(800/gen.l), y*(800/gen.l), 800/gen.l, 800/gen.l);
+//				
 				}
 			}
 		

@@ -116,30 +116,29 @@ public class Vector {
 		return c;
 	}
 	
-	public static Vector reduce(Vector a){
+	public static Vector normalize(Vector a){
 		
-		//WARNING! DOES NOT WORK WITH Z
 		
 		Vector r;
-		if(a.x == 0 || a.y == 0){
-			if(a.x != 0){
-				r = new Vector(1,0);
-			}
-			else if (a.y != 0){
-				r = new Vector(0,1);
-			}
-			else{
-				r = new Vector(0,0);
-			}
-		}
-		else if(Math.abs(a.x) > Math.abs(a.y)){
-			r = Vector.mult(a, Math.abs(1/a.x));
-		}
-		else{
-			r = Vector.mult(a, Math.abs(1/a.y));
-		}
+		
+		double l = Math.sqrt(a.x*a.x + a.y*a.y);
+		
+		r = new Vector(a.x/l, a.y/l);
 		
 		return r;
+	}
+	
+	@Override
+	public int hashCode(){
+		
+		int hash = 0;
+		
+		String s = x + ":" + y;
+		
+		hash = s.hashCode();
+		
+		return hash;
+		
 	}
 	
 }

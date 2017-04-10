@@ -1,4 +1,5 @@
 package main;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
@@ -42,6 +43,8 @@ public class Screen{
 		image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		pane = new JLabel(new ImageIcon(image));
 		pane.setFocusable(false);
+		
+		pane.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 		
 		image = toCompatibleImage(image);
 		

@@ -39,7 +39,7 @@ public class Camera {
 			for(int cY = 0; cY < this.height/10; cY++){
 				int x = (int) (cX + pos.x);
 				int y = (int) (cY + pos.y);
-				Pair key = new Pair(x,y);
+				Vector key = new Vector(x,y);
 				coords.add(key.hashCode());
 			}
 		}

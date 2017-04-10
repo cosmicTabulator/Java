@@ -1,0 +1,48 @@
+package main;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class CaveGenerator {
+
+	public HashMap<Integer,Cell> cells;
+	public HashMap<Integer,Cell> buffer;
+	
+	public CaveGenerator(int width, int height){
+		
+		
+		
+	}
+	
+	public class Cell {
+
+		boolean status;
+		
+		Vector pos;
+		
+		public Cell(int x, int y, boolean state){
+			pos = new Vector(x, y);
+			this.status = state;
+		}
+		
+		public List<Cell> getNeighbors(){
+			
+			List<Cell> neighbors = new ArrayList<Cell>();
+			
+			for(int xV = -1; xV < 2; xV++){
+				for(int yV = -1; yV < 2; yV++){
+					Vector dir = new Vector(pos.x + xV, pos.y + yV);
+					Cell c = CaveGenerator.this.cells.get(dir.hashCode());
+					neighbors.add(c);
+				}
+			}
+			
+			return neighbors;
+			
+		}
+		
+	}
+	
+}

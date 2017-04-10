@@ -1,0 +1,180 @@
+package main;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
+public class CaveGenerator {
+
+	int width; 
+	int height;
+	
+	Random rand = new Random();
+	
+	public HashMap<Integer,Cell> cells;
+	public HashMap<Integer,Cell> buffer;
+	
+	public CaveGenerator(int width, int height){
+		
+		this.width = width;
+		this.height = height;
+		
+		for(int x = 0; x < width; x++){
+			for(int y = 0; y < height; y++){
+				Vector pos = new Vector(x,y);
+				Cell c = new Cell(x,y,rand.nextBoolean());
+				cells.put(pos.hashCode(), c);
+			}
+		}
+		
+	}
+	
+	public void step(){
+		
+		buffer.clear();
+		
+		for(Cell c : cells.values()){
+			List<Cell> l = c.getNeighbors();
+			
+			int alive = 0;
+			
+			for(Cell i: l){
+				if(i != null){
+					if(i.status){
+						alive++;
+					}
+				}
+			}
+			
+			boolean outState = false;
+			
+			if(c.status && alive > 4){
+				outState = true;
+			}
+			if(c.status && alive < 5){
+				outState = false;
+			}
+			if(!c.status && alive > 4){
+				outState = true;
+			}
+			if(!c.status && alive < 5){
+				outState = false;
+			}
+			
+			Cell cout = new Cell((int)c.pos.x, (int)c.pos.y, outState);
+			buffer.put(cout.pos.hashCode(), cout);
+			
+		}
+		
+		cells.clear();
+		for(int key : buffer.keySet()){
+			Cell value = buffer.get(key);
+			cells.put(key, value);
+		}
+		
+	}
+	
+	public ArrayList<Vector> getLargest(){
+		
+		int maxId = id();
+
+		HashMap<Integer,ArrayList<Cell>> bigMap = new HashMap<Integer,ArrayList<Cell>>();
+		
+		for(int i = 1; i < maxId + 1; i++){
+			
+			bigMap.put(i, new ArrayList<Cell>());
+			
+		}
+		
+		for(Cell c : cells.values()){
+			
+			if(c.status){
+				bigMap.get(c.caveId).add(c);
+			}
+			
+		}
+		
+		int largest = 0;
+		int id = 0;
+		for(ArrayList<Cell> a : bigMap.values()){
+			
+			if(a.size() > largest){
+				largest = a.size();
+				id = a.get(0).caveId;
+			}
+		}
+		
+		ArrayList<Vector> cave = new ArrayList<Vector>();
+		
+		return cave;
+	}
+	
+	private int id(){
+		
+		int currentId = 0;
+		
+		for(Cell c : cells.values()){
+			
+			if(c.status && c.caveId == 0){
+				
+				currentId++;
+					
+				c.caveId = currentId;	
+				reId(c, currentId);
+				
+			}
+			
+			
+		}
+		
+		return currentId;
+		
+	}
+	
+	private void reId(Cell cell, int id){
+		
+		for(Cell c : cell.getNeighbors()){
+			
+			if(c != null){
+				if(c.status && c.caveId == 0){
+					c.caveId = id;
+					colorize(c, id);
+				}
+			}
+			
+		}
+		
+	}
+	
+	public class Cell {
+
+		boolean status;
+		int caveId = 0;
+		Vector pos;
+		
+		public Cell(int x, int y, boolean state){
+			pos = new Vector(x, y);
+			this.status = state;
+		}
+		
+		public List<Cell> getNeighbors(){
+			
+			List<Cell> neighbors = new ArrayList<Cell>();
+			
+			for(int xV = -1; xV < 2; xV++){
+				for(int yV = -1; yV < 2; yV++){
+					Vector dir = new Vector(pos.x + xV, pos.y + yV);
+					Cell c = CaveGenerator.this.cells.get(dir.hashCode());
+					neighbors.add(c);
+				}
+			}
+			
+			return neighbors;
+			
+		}
+		
+	}
+	
+}

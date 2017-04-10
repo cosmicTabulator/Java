@@ -20,7 +20,7 @@ public class World {
 	
 	public void addTile(Tile t){
 		
-		Pair key = new Pair((int)t.pos.x, (int)t.pos.y);
+		Vector key = new Vector(t.pos.x, t.pos.y);
 		
 		tiles.put(key.hashCode(), t);
 	}

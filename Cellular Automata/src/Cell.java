@@ -22,7 +22,9 @@ public class Cell {
 			for(int yV = -1; yV < 2; yV++){
 				Vector dir = new Vector(pos.x + xV, pos.y + yV);
 				Cell c = Main.cells.get(dir.hashCode());
-				neighbors.add(c);
+				if(c != null){
+					neighbors.add(c);
+				}
 			}
 		}
 		

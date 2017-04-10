@@ -64,11 +64,11 @@ public class Generator {
 		return v;
 	}
 	
-	public List<Pair> layerLine(int height, int width, float varience){
+	public List<Vector> layerLine(int height, int width, float varience){
 		
-		List<Pair> heights = new ArrayList<Pair>();
+		List<Vector> heights = new ArrayList<Vector>();
 		
-		heights.add(new Pair(0, height));
+		heights.add(new Vector(0, height));
 		
 		int currentHeight = height;
 		
@@ -86,7 +86,7 @@ public class Generator {
 				
 			}
 			
-			heights.add(new Pair(x, currentHeight));
+			heights.add(new Vector(x, currentHeight));
 			
 		}
 		
