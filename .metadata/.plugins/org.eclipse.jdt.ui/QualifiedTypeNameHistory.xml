@@ -38,4 +38,5 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.awt.Cursor"/>
 <fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL15"/>
 </qualifiedTypeNameHistroy>
