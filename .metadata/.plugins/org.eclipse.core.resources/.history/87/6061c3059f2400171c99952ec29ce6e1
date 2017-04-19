@@ -1,0 +1,34 @@
+
+public class Matrix {
+
+	int width;
+	int height;
+	
+	ArrayList<Float> m = new ArrayList<Float>();
+	
+	public Matrix(int x, int y){
+		
+		width = x;
+		height = y;
+		
+		
+		
+	}
+	
+	
+	public int set(float array[]){
+		
+		if(array.length != width * height){
+			return -1;
+		}
+		
+		for(float e : array){
+			
+			
+			
+		}
+		
+		return 0;
+		
+	}
+}

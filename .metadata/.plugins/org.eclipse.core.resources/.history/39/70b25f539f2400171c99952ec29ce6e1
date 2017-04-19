@@ -1,0 +1,86 @@
+
+
+public class Vector3 {
+
+	public double x;
+	public double y;
+	public double z;
+	
+	public Vector3(double x, double y){
+		
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		
+	}
+	
+	public static Vector3 add(Vector3 a, Vector3 b){
+		
+		double x = a.x + b.x;
+		double y = a.y + b.y;
+		double z = a.z + b.z;
+		
+		Vector3 c = new Vector3(x, y, z);
+		
+		return c;
+	}
+	
+	public static Vector mult(Vector a, double n){
+		
+		double x = a.x * n;
+		double y = a.y * n;
+		
+		Vector c = new Vector(x,y);
+		return c;
+	}
+	
+	public Vector cross(Vector a, Vector b){
+		
+		//TODO Cross Products
+		// Default returns empty vector
+		
+		Vector c = new Vector(0,0);
+		
+		return c;
+	}
+	
+	public Vector dot(Vector a, Vector b){
+		
+		//TODO Dot Products
+		//Default returns empty vector
+		
+		Vector c = new Vector(0,0);
+		
+		return c;
+	}
+	
+	public void print(){
+		System.out.println(this.x + ", " + this.y);
+	}
+	
+	public static Vector reduce(Vector a){
+		
+		//WARNING! DOES NOT WORK WITH Z
+		
+		Vector r;
+		if(a.x == 0 || a.y == 0){
+			if(a.x != 0){
+				r = new Vector(1,0);
+			}
+			else if (a.y != 0){
+				r = new Vector(0,1);
+			}
+			else{
+				r = new Vector(0,0);
+			}
+		}
+		else if(Math.abs(a.x) > Math.abs(a.y)){
+			r = Vector.mult(a, Math.abs(1/a.x));
+		}
+		else{
+			r = Vector.mult(a, Math.abs(1/a.y));
+		}
+		
+		return r;
+	}
+}

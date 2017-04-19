@@ -1,0 +1,45 @@
+import java.util.ArrayList;
+
+public class Matrix {
+
+	int width;
+	int height;
+	
+	ArrayList<Double> m = new ArrayList<Double>();
+	
+	public Matrix(int x, int y){
+		
+		width = x;
+		height = y;
+		
+	}
+	
+	
+	public int set(double array[]){
+		
+		if(array.length != width * height){
+			return -1;
+		}
+		
+		m.clear();
+		
+		for(double e : array){
+			
+			m.add(e);
+			
+		}
+		
+		return 0;
+		
+	}
+	
+	public Vector3 mult(Vector3 v){
+		
+		Vector3 o = new Vector3(0,0,0);
+		
+		return o;
+		
+	}
+	
+	
+}
